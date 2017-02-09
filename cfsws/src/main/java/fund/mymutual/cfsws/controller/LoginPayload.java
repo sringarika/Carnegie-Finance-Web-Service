@@ -31,8 +31,4 @@ public class LoginPayload {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public void validate() {
-
-    }
 }
