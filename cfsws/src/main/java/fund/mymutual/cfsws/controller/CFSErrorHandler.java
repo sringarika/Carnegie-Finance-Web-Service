@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import fund.mymutual.cfsws.databean.CFSRole;
+
 @ControllerAdvice
 public class CFSErrorHandler {
 
