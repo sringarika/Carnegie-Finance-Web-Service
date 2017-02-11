@@ -1,11 +1,15 @@
 package fund.mymutual.cfsws.rest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import fund.mymutual.cfsws.business.CustomerService;
 import fund.mymutual.cfsws.business.EmployeeService;
 import fund.mymutual.cfsws.business.Portfolio;
+import fund.mymutual.cfsws.business.Position;
 import fund.mymutual.cfsws.business.SessionService;
 import fund.mymutual.cfsws.model.CFSRole;
 import fund.mymutual.cfsws.model.JpaUtil;
@@ -83,12 +87,28 @@ public class BusinessServiceConfiguration {
     }
 
     @Bean CustomerService customerService() {
-        // TODO: Use a real implementation of EmployeeService.
+        // TODO: Use a real implementation of CustomerService.
         return new CustomerService() {
             @Override
             public Portfolio getPortfolio(String username) {
-                // TODO Auto-generated method stub
-                return null;
+                List<Position> positions = new ArrayList<>();
+
+                Position p1 = new Position();
+                p1.setName("fund1");
+                p1.setPriceInCents(678);
+                p1.setShares(901);
+                positions.add(p1);
+
+                Position p2 = new Position();
+                p2.setName("fund2");
+                p2.setPriceInCents(200);
+                p2.setShares(300);
+                positions.add(p2);
+
+                Portfolio portfolio = new Portfolio();
+                portfolio.setCashInCents(12345);
+                portfolio.setPositions(positions);
+                return portfolio;
             }
 
             @Override
