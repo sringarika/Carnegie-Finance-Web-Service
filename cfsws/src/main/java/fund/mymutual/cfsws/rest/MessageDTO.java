@@ -1,10 +1,10 @@
-package fund.mymutual.cfsws.controller;
+package fund.mymutual.cfsws.rest;
 
 // { “message”:“Welcome first name”}
-public class Message {
+public class MessageDTO {
     private String message;
 
-    public Message(String message) {
+    public MessageDTO(String message) {
         this.message = message;
     }
 

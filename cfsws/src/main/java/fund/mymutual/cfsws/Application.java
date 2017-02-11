@@ -3,8 +3,8 @@ package fund.mymutual.cfsws;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import fund.mymutual.cfsws.databean.UserBean;
 import fund.mymutual.cfsws.model.JpaUtil;
+import fund.mymutual.cfsws.model.User;
 
 @SpringBootApplication
 public class Application {
@@ -16,8 +16,8 @@ public class Application {
     private static void seedDB() {
         // Add initial user. This is the only required initial user in specification.
         JpaUtil.transaction(em -> {
-            if (em.find(UserBean.class, "jadmin") != null) return;
-            UserBean jadmin = new UserBean();
+            if (em.find(User.class, "jadmin") != null) return;
+            User jadmin = new User();
             jadmin.setUsername("jadmin");
             jadmin.setFirstName("Jane");
             jadmin.setLastName("Admin");

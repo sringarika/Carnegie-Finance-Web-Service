@@ -1,4 +1,4 @@
-package fund.mymutual.cfsws.databean;
+package fund.mymutual.cfsws.model;
 
 public enum CFSRole {
     Employee,

@@ -1,4 +1,4 @@
-package fund.mymutual.cfsws.controller;
+package fund.mymutual.cfsws.rest;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 //   “username”:“Username of the person attempting to login”,
 //   “password”: “Password of the person attempting to login”
 // }
-public class LoginPayload {
+public class LoginDTO {
     @NotEmpty
     @Length(max = 100)
     private String username;

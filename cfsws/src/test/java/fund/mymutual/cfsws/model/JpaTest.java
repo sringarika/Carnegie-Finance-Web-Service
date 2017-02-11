@@ -2,8 +2,6 @@ package fund.mymutual.cfsws.model;
 
 import java.util.List;
 
-import fund.mymutual.cfsws.databean.CFSRole;
-import fund.mymutual.cfsws.databean.UserBean;
 import junit.framework.TestCase;
 
 public class JpaTest extends TestCase {
@@ -14,26 +12,26 @@ public class JpaTest extends TestCase {
         });
     }
 
-    public void testUserBean() {
+    public void testUser() {
         JpaUtil.transaction(em -> {
-            em.createQuery("DELETE FROM UserBean").executeUpdate();
+            em.createQuery("DELETE FROM User").executeUpdate();
 
-            UserBean john = new UserBean();
+            User john = new User();
             john.setUsername("john.d");
             john.setFirstName("John");
             john.setLastName("Doe");
             john.setRole(CFSRole.Customer);
             em.persist(john);
 
-            UserBean jane = new UserBean();
+            User jane = new User();
             jane.setUsername("jane.d");
             jane.setFirstName("Jane");
             jane.setLastName("Doe");
             jane.setRole(CFSRole.Employee);
             em.persist(jane);
 
-            List<UserBean> result = em.createQuery("FROM UserBean", UserBean.class).getResultList();
-            for (UserBean user : result) {
+            List<User> result = em.createQuery("FROM User", User.class).getResultList();
+            for (User user : result) {
                 if (user.getUsername().equals("john.d")) {
                     assertEquals(user.getFirstName(), "John");
                     assertEquals(user.getLastName(), "Doe");

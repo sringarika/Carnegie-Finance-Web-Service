@@ -1,4 +1,4 @@
-package fund.mymutual.cfsws.databean;
+package fund.mymutual.cfsws.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +10,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 @Entity
 @Table(name="cfs_user")
-public class UserBean {
+public class User {
     @Id
     private String username;
     private String firstName;
@@ -20,7 +20,7 @@ public class UserBean {
     @Enumerated(EnumType.STRING)
     private CFSRole role;
 
-    public UserBean() {
+    public User() {
 
     }
 

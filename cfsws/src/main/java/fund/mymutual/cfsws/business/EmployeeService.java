@@ -1,31 +1,31 @@
 package fund.mymutual.cfsws.business;
 
-import fund.mymutual.cfsws.databean.UserBean;
+import fund.mymutual.cfsws.model.User;
 
-public interface EmployeeBL {
+public interface EmployeeService {
     /**
      * Create a customer.
      * @param customer The customer to create.
-     * @throws Exception if customer username already exists.
+     * @throws BusinessLogicException if customer username already exists.
      */
-    void createCustomer(UserBean customer);
+    void createCustomer(User customer) throws BusinessLogicException;
 
     /**
      * Deposit check for a customer.
      * @param username The customer's username.
      * @param cashInCents The amount to deposit, in cents. (e.g. 123 for $1.23)
-     * @throws Exception if username does not exist or is not a customer.
+     * @throws BusinessLogicException if username does not exist or is not a customer.
      */
-    void depositCheck(String username, int cashInCents);
+    void depositCheck(String username, int cashInCents) throws BusinessLogicException;
 
     /**
      * Create a fund.
      * @param name The name of the fund to create.
      * @param symbol The symbol of the fund to create.
      * @param initialValueInCents The initial price, in cents. (e.g. 456 for $4.56 per share).
-     * @throws Exception if symbol already exists.
+     * @throws BusinessLogicException if symbol already exists.
      */
-    void createFund(String name, String symbol, int initialValueInCents);
+    void createFund(String name, String symbol, int initialValueInCents) throws BusinessLogicException;
 
     /**
      * Cause the values of the funds to fluctuate.
