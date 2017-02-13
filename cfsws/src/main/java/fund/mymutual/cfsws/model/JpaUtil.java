@@ -1,8 +1,5 @@
 package fund.mymutual.cfsws.model;
 
-import java.util.function.Consumer;
-import java.util.function.Function;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -36,8 +33,10 @@ public class JpaUtil {
      * @param <T> function result
      */
     @FunctionalInterface
-    public interface JPATransactionFunction<T>
-            extends Function<EntityManager, T> {
+    public interface JPATransactionFunction<T, E extends Throwable> {
+
+        T apply(EntityManager em) throws E;
+
         /**
          * Before transaction completion function
          */
@@ -57,19 +56,21 @@ public class JpaUtil {
      * JPA transaction function without return value
      */
     @FunctionalInterface
-    public interface JPATransactionVoidFunction
-            extends Consumer<EntityManager> {
+    public interface JPATransactionVoidFunction<E extends Throwable> {
+
+        void accept(EntityManager em) throws E;
+
         /**
          * Before transaction completion function
          */
-        default void beforeTransactionCompletion() {
+        default void beforeTransactionCompletion() throws E {
 
         }
 
         /**
          * After transaction completion function
          */
-        default void afterTransactionCompletion() {
+        default void afterTransactionCompletion() throws E {
 
         }
     }
@@ -82,7 +83,7 @@ public class JpaUtil {
      *
      * @return result
      */
-    public static <T> T transaction(JPATransactionFunction<T> function) {
+    public static <T, E extends Throwable> T transaction(JPATransactionFunction<T, E> function) throws E {
         T result = null;
         EntityManager entityManager = null;
         EntityTransaction txn = null;
@@ -114,7 +115,7 @@ public class JpaUtil {
      *
      * @param function function
      */
-    public static void transaction(JPATransactionVoidFunction function) {
+    public static <E extends Throwable> void transaction(JPATransactionVoidFunction<E> function) throws E {
         EntityManager entityManager = null;
         EntityTransaction txn = null;
         try {
@@ -138,5 +139,4 @@ public class JpaUtil {
             }
         }
     }
-
 }

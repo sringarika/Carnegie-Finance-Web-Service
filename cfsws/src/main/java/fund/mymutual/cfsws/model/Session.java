@@ -13,25 +13,25 @@ public class Session {
 
     public Session() {
     }
-    
+
     public String getUsername() {
     	return username;
     }
     public void setUsername(String username) {
-    	username = this.username;
+    	this.username = username;
     }
-    
+
     public String getSessionid() {
     	return sessionid;
     }
     public void setSessionid(String sessionid) {
-    	sessionid = this.sessionid;
+    	this.sessionid = sessionid;
     }
-    
+
     public String getExpdate() {
     	return expdate;
     }
     public void setExpdate(String expdate) {
-    	expdate = this.expdate;
+    	this.expdate = expdate;
     }
 }

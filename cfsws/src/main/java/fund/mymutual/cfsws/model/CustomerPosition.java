@@ -1,5 +1,6 @@
 package fund.mymutual.cfsws.model;
 import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,32 +17,32 @@ public class CustomerPosition implements Serializable {
 
     public CustomerPosition() {
     }
-    
+
     public String getFundsymbol() {
     	return fundsymbol;
     }
     public void setFundsymbol(String fundsymbol) {
-    	fundsymbol = this.fundsymbol;
+    	this.fundsymbol = fundsymbol;
     }
-    
+
     public String getFundname() {
     	return fundname;
     }
     public void setFundname(String fundname) {
-    	fundname = this.fundname;
+    	this.fundname = fundname;
     }
-    
+
     public int getShares() {
     	return shares;
     }
     public void setShares(int shares) {
-    	shares = this.shares;
+    	this.shares = shares;
     }
-    
+
     public String getUsername() {
     	return username;
     }
     public void setUsername(String username) {
-    	username = this.username;
+    	this.username = username;
     }
 }
