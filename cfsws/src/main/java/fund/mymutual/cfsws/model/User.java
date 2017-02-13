@@ -20,7 +20,7 @@ public class User {
     private String state;
     private String zip;
     private String email;
-    private double cash;
+    private int cashincents;
 
     @Enumerated(EnumType.STRING)
     private CFSRole role;
@@ -173,11 +173,11 @@ public class User {
     /**
      * Gets the cash.
      */
-    public double getCash() {
-        return cash;
+    public int getCash() {
+        return cashincents;
     }
 
-    public void setCash(double cash) {
-        this.cash = cash;
+    public void setCash(int cashincents) {
+        this.cashincents = cashincents;
     }
 }

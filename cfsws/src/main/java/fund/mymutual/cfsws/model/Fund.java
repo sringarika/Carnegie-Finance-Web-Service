@@ -9,7 +9,7 @@ public class Fund {
     @Id
     private String fundsymbol;
     private String fundname;
-    private double fundprice;
+    private int fundprice; //in cents
     private String funddate;
 
 
@@ -30,10 +30,10 @@ public class Fund {
     	fundname = this.fundname;
     }
     
-    public double getFundprice() {
+    public int getFundprice() {
     	return fundprice;
     }
-    public void setFundprice(double fundprice) {
+    public void setFundprice(int fundprice) {
     	fundprice = this.fundprice;
     }
     

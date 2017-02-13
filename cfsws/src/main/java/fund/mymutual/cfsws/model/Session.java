@@ -7,8 +7,8 @@ import javax.persistence.Table;
 @Table(name="cfs_session")
 public class Session {
     @Id
-    private String username;
     private String sessionid;
+    private String username;
     private String expdate;
 
     public Session() {
