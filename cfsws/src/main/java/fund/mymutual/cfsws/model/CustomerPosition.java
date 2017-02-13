@@ -1,11 +1,12 @@
 package fund.mymutual.cfsws.model;
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cfs_customerposition")
-public class CustomerPosition {
+public class CustomerPosition implements Serializable {
     @Id
     private String fundsymbol;
     private String fundname;
