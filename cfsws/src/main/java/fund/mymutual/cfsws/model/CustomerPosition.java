@@ -30,7 +30,7 @@ public class CustomerPosition {
     	fundname = this.fundname;
     }
     
-    public double getShares() {
+    public int getShares() {
     	return shares;
     }
     public void setShares(int shares) {
