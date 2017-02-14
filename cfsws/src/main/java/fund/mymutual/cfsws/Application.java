@@ -3,6 +3,7 @@ package fund.mymutual.cfsws;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import fund.mymutual.cfsws.model.CFSRole;
 import fund.mymutual.cfsws.model.JpaUtil;
 import fund.mymutual.cfsws.model.User;
 
@@ -26,6 +27,7 @@ public class Application {
             jadmin.setCity("Pittsburgh");
             jadmin.setState("Pa");
             jadmin.setZip("15143");
+            jadmin.setRole(CFSRole.Employee);
             em.persist(jadmin);
         });
     }
