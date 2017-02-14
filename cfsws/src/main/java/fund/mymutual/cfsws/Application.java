@@ -22,12 +22,10 @@ public class Application {
             jadmin.setFirstName("Jane");
             jadmin.setLastName("Admin");
             jadmin.updatePassword("admin");
-            // TODO: Set the following fields.
-            // Address: 123 Main street
-            // City: Pittsburgh
-            // State: Pa
-            // Zip: 15143
-
+            jadmin.setAddress("123 Main street");
+            jadmin.setCity("Pittsburgh");
+            jadmin.setState("Pa");
+            jadmin.setZip("15143");
             em.persist(jadmin);
         });
     }
