@@ -1,13 +1,15 @@
 package fund.mymutual.cfsws.rest;
 
+import java.math.BigDecimal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fund.mymutual.cfsws.business.BusinessLogicException;
@@ -59,45 +61,56 @@ public class EmployeeController {
     }
     
     @RequestMapping(value="/depositCheck", method=RequestMethod.POST)
-    public MessageDTO depositeCheck(@ModelAttribute("username") String username, @RequestParam("cashInCents") int cashInCents) 
-                                    throws BusinessLogicException {
-        if (cashInCents <= 0) {
+    public MessageDTO depositCheck(@ModelAttribute("username") String username, @RequestBody DepositCheckDTO depositCheckDTO) {
+        if (Integer.valueOf(depositCheckDTO.getCash()) <= 0) {
             return new MessageDTO("The input you provided is not valid");
         }
-        String cash = String.valueOf(cashInCents);
-        if (cash.length() > 2) {
-        cash = cash.substring(0, cash.length()-2) + "." + cash.substring(cash.length()-2);
-        } else if (cash.length() == 2) {
-            cash = "0." + cash;
-        } else if (cash.length() == 1) {
-            cash = "0.0" + cash;
-        }
-        int cashInDollar = Integer.parseInt(cash);
-        employeeService.depositCheck(username, cashInDollar);
+        BigDecimal bigDecimal = new BigDecimal(depositCheckDTO.getCash());
+        bigDecimal.scaleByPowerOfTen(2);
+        int cashInCents = bigDecimal.intValueExact();
+            try {
+                employeeService.depositCheck(depositCheckDTO.getUsername(), cashInCents);
+            } catch (NumberFormatException | BusinessLogicException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        
         return new MessageDTO("The check was successfully deposited");
     }
 
     
     @RequestMapping(value="/createCustomer", method=RequestMethod.POST)
     public MessageDTO createCustomer(@ModelAttribute("username") String userName, 
-                                    @RequestParam String fname, String lname, String address, String city, String state,
-                                    String zip, String email, int cash, String password){
-        if (fname == null || lname == null || address == null || city == null 
-            || state == null || zip == null || email == null || password == null) {
-            return new MessageDTO("The input you provided is not valid");
-        }
-        customerDTO.setFname(fname);
-        customerDTO.setLname(lname);
-        customerDTO.setAddress(address);
-        customerDTO.setCity(city);
-        customerDTO.setState(state);
-        customerDTO.setZip(zip);
-        customerDTO.setEmail(email);
-        customerDTO.setPassword(password);
+                                    @RequestBody CustomerDTO customerDTO){
+        User customer = new User();
+        BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
+        bigDecimal.scaleByPowerOfTen(2);
+        int cashInCents = bigDecimal.intValueExact();
+        customer.setCash(cashInCents);
         
-        return new MessageDTO(fname + " was registered successfully");
+        try {
+            employeeService.createCustomer(customer);
+        } catch (BusinessLogicException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        return new MessageDTO(customerDTO.getFname() + " was registered successfully");
         
     }
     
-   
+    @RequestMapping(value="/creatFund", method=RequestMethod.POST)
+    public MessageDTO createFund(@ModelAttribute("username") String userName,
+                                    @RequestBody CreateFundDTO createFundDTO) {
+        
+        BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitialValue());
+        bigDecimal.scaleByPowerOfTen(2);
+        int initialValueInCents = bigDecimal.intValueExact();
+        try {
+            employeeService.createFund(createFundDTO.getName(), createFundDTO.getSymbol(), initialValueInCents);
+        } catch (BusinessLogicException e) {
+            return new MessageDTO("");
+        }
+        return new MessageDTO("");
+    }
 }

@@ -10,7 +10,7 @@ public class CustomerDTO {
     private String state;
     private String zip;
     private String email;
-    private int cash;
+    private String cash;
     
     public String getUsername() {
         return username;
@@ -77,10 +77,10 @@ public class CustomerDTO {
         this.email = email;
     }
     
-    public int getCash() {
+    public String getCash() {
         return cash;
     }
-    public void setCash(int cash) {
+    public void setCash(String cash) {
         this.cash = cash;
     }
 }
