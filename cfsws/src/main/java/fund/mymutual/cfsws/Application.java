@@ -17,8 +17,11 @@ public class Application {
     private static void seedDB() {
         // Add initial user. This is the only required initial user in specification.
         JpaUtil.transaction(em -> {
-            if (em.find(User.class, "jadmin") != null) return;
-            User jadmin = new User();
+            User jadmin = em.find(User.class, "jadmin");
+            if (jadmin != null) {
+                em.remove(jadmin);
+            }
+            jadmin = new User();
             jadmin.setUsername("jadmin");
             jadmin.setFirstName("Jane");
             jadmin.setLastName("Admin");
