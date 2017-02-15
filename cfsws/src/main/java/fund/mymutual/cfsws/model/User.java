@@ -1,8 +1,11 @@
 package fund.mymutual.cfsws.model;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -25,6 +28,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private CFSRole role;
 
+    @OneToMany(mappedBy ="username")   
+    private Set<CustomerPosition> customerposition;
+    
+    public Set<CustomerPosition> getCustomerpositions() {
+		return customerposition;
+    }
+    
     public User() {
 
     }

@@ -11,8 +11,8 @@ public class Fund {
     private String fundname;
     private int fundprice; //in cents
     private String funddate;
-
-
+    
+    
     public Fund() {
     }
 

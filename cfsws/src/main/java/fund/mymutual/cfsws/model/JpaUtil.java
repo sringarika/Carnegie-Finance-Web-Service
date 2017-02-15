@@ -1,5 +1,8 @@
 package fund.mymutual.cfsws.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -11,7 +14,19 @@ public class JpaUtil {
     public static EntityManagerFactory getEntityManagerFactory() {
         if (entityManagerFactory == null) {
             try {
-                entityManagerFactory = Persistence.createEntityManagerFactory("fund.mymutual.cfsws.model");
+                Map<String, Object> config = new HashMap<String, Object>();
+                if (System.getenv("RDS_DB_NAME") != null) {
+                    String dbName = System.getenv("RDS_DB_NAME");
+                    String userName = System.getenv("RDS_USERNAME");
+                    String password = System.getenv("RDS_PASSWORD");
+                    String hostname = System.getenv("RDS_HOSTNAME");
+                    String port = System.getenv("RDS_PORT");
+                    String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName +
+                            "?useUnicode=true&characterEncoding=utf8" +
+                            "&user=" + userName + "&password=" + password;
+                    config.put("javax.persistence.jdbc.url", jdbcUrl);
+                }
+                entityManagerFactory = Persistence.createEntityManagerFactory("fund.mymutual.cfsws.model", config);
             } catch (Exception e) {
                 e.printStackTrace();
             }

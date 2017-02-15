@@ -3,33 +3,32 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="cfs_customerposition")
-public class CustomerPosition implements Serializable {
-    @Id
-    private String fundsymbol;
-    private String fundname;
+public class CustomerPosition implements Serializable{
+	private static final long serialVersionUID = 1L;
     private int shares; //should be a whole number
     @Id
     private String username;
 
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "fundsymbol")
+    private Fund fund;
+
+    public Fund getFund() {
+    	return fund;
+    }
+
+    public void setFund(Fund fund) {
+        this.fund = fund;
+    }
+
     public CustomerPosition() {
-    }
-
-    public String getFundsymbol() {
-    	return fundsymbol;
-    }
-    public void setFundsymbol(String fundsymbol) {
-    	this.fundsymbol = fundsymbol;
-    }
-
-    public String getFundname() {
-    	return fundname;
-    }
-    public void setFundname(String fundname) {
-    	this.fundname = fundname;
     }
 
     public int getShares() {

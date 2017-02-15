@@ -1,6 +1,8 @@
 package fund.mymutual.cfsws.business;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
@@ -19,8 +21,17 @@ public class CustomerServiceImpl implements CustomerService {
             if (user == null) {
                 throw new BusinessLogicException("There is no such user!");
             }
-            // TODO: Get positions from model.
-            List<Position> positions = null;
+            Set<CustomerPosition> customerpositions = user.getCustomerpositions();
+            List<Position> positions = new ArrayList<>(customerpositions.size());
+
+            for (CustomerPosition customerposition : customerpositions) {
+                Position position = new Position();
+                position.setShares(customerposition.getShares());
+                Fund fund = customerposition.getFund();
+                position.setName(fund.getFundname());
+                position.setPriceInCents(fund.getFundprice());
+                positions.add(position);
+            }
 
             Portfolio result = new Portfolio();
             result.setCashInCents(user.getCash());
@@ -45,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerPosition getCustomerPosition(EntityManager em, String username, String symbol,
             LockModeType lockModeType) {
         TypedQuery<CustomerPosition> query = em.createQuery(
-                "FROM CustomerPosition p WHERE p.username = :username AND UPPER(p.fundsymbol) = UPPER(:symbol)",
+                "FROM CustomerPosition p WHERE p.username = :username AND UPPER(p.fund.fundsymbol) = UPPER(:symbol)",
                 CustomerPosition.class);
         query.setParameter("username", username);
         query.setParameter("symbol", symbol);
@@ -88,8 +99,7 @@ public class CustomerServiceImpl implements CustomerService {
                 position.setShares(position.getShares() + shares);
             } else {
                 position = new CustomerPosition();
-                position.setFundsymbol(fund.getFundsymbol());
-                position.setFundname(fund.getFundname());
+                position.setFund(fund);
                 position.setUsername(user.getUsername());
                 position.setShares(shares);
                 em.persist(position);
