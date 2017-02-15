@@ -25,9 +25,6 @@ public class EmployeeController {
 
     @Autowired
     private SessionService sessionService;
-    
-    @Autowired
-    private CustomerDTO customerDTO;
 
     @ModelAttribute("username")
     public String authenticateRequest(HttpServletRequest request,
@@ -66,55 +63,43 @@ public class EmployeeController {
     }
     
     @RequestMapping(value="/depositCheck", method=RequestMethod.POST)
-    public MessageDTO depositCheck(@ModelAttribute("username") String username, @RequestBody DepositCheckDTO depositCheckDTO) {
+    public MessageDTO depositCheck(@ModelAttribute("username") String username, 
+                                   @RequestBody DepositCheckDTO depositCheckDTO) throws BusinessLogicException {
         if (Integer.valueOf(depositCheckDTO.getCash()) <= 0) {
             return new MessageDTO("The input you provided is not valid");
         }
         BigDecimal bigDecimal = new BigDecimal(depositCheckDTO.getCash());
         bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = bigDecimal.intValueExact();
-            try {
-                employeeService.depositCheck(depositCheckDTO.getUsername(), cashInCents);
-            } catch (NumberFormatException | BusinessLogicException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+                
+        employeeService.depositCheck(depositCheckDTO.getUsername(), cashInCents);
         return new MessageDTO("The check was successfully deposited");
     }
 
     
     @RequestMapping(value="/createCustomer", method=RequestMethod.POST)
     public MessageDTO createCustomer(@ModelAttribute("username") String userName, 
-                                    @RequestBody CustomerDTO customerDTO){
+                                    @RequestBody CustomerDTO customerDTO) throws BusinessLogicException{
         User customer = new User();
         BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
         bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = bigDecimal.intValueExact();
         customer.setCash(cashInCents);
         
-        try {
-            employeeService.createCustomer(customer);
-        } catch (BusinessLogicException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
+        employeeService.createCustomer(customer);
         return new MessageDTO(customerDTO.getFname() + " was registered successfully");
         
     }
     
     @RequestMapping(value="/creatFund", method=RequestMethod.POST)
     public MessageDTO createFund(@ModelAttribute("username") String userName,
-                                    @RequestBody CreateFundDTO createFundDTO) {
+                                    @RequestBody CreateFundDTO createFundDTO) throws BusinessLogicException {
         
         BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitialValue());
         bigDecimal.scaleByPowerOfTen(2);
         int initialValueInCents = bigDecimal.intValueExact();
-        try {
-            employeeService.createFund(createFundDTO.getName(), createFundDTO.getSymbol(), initialValueInCents);
-        } catch (BusinessLogicException e) {
-            return new MessageDTO("");
-        }
-        return new MessageDTO("");
+            
+        employeeService.createFund(createFundDTO.getName(), createFundDTO.getSymbol(), initialValueInCents);
+        return new MessageDTO("The fund was successfully created");
     }
 }

@@ -8,27 +8,42 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import fund.mymutual.cfsws.business.Position;
 
-public class ViewPortfolioDTO {
+public class ViewPortfolioDTO extends MessageDTO {
+    
+    private String message;
     
     @NotEmpty
-    private int cashInDollar;
+    private String cash;
     
     @NotNull
-    private List<Position> positions;
-
-    public int getCashInDollar() {
-        return cashInDollar;
+    private List<Funds> funds;
+    
+    public ViewPortfolioDTO(String message) {
+        super(message);
+    }
+    
+    @Override
+    public String getMessage() {
+        return message;
+    }
+    
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public void setCashInDollar(int cashInCents) {
-        this.cashInDollar = cashInCents;
+    public String getCash() {
+        return cash;
     }
 
-    public List<Position> getPositions() {
-        return positions;
+    public void setCash(String cash) {
+        this.cash = cash;
     }
 
-    public void setPositions(List<Position> positions) {
-        this.positions = positions;
+    public List<Funds> getFunds() {
+        return funds;
+    }
+
+    public void setFunds(List<Funds> funds) {
+        this.funds = funds;
     }
 }
