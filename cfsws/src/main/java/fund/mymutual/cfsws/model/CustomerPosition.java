@@ -14,13 +14,6 @@ public class CustomerPosition {
     private int shares; //should be a whole number
     @Id
     private String username;
-
-    @ManyToOne
-    @JoinTable(name = "cfs_fund")
-    Fund fund;
-    @ManyToOne
-    @JoinTable(name = "cfs_user")
-    User user;
     
     public CustomerPosition() {
     }

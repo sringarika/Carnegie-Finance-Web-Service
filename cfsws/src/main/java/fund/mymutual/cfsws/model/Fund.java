@@ -15,8 +15,6 @@ public class Fund {
     private int fundprice; //in cents
     private String funddate;
 
-    @OneToMany(mappedBy ="fund")
-    Set<CustomerPosition> customerposition;
     
     public Fund() {
     }
