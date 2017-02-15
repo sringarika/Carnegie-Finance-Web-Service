@@ -3,6 +3,8 @@ import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -10,10 +12,18 @@ import javax.persistence.Table;
 public class CustomerPosition implements Serializable {
     @Id
     private String fundsymbol;
-    private String fundname;
     private int shares; //should be a whole number
     @Id
     private String username;
+
+
+    @ManyToOne
+    @JoinColumn(name = "fundsymbol")
+    private Fund fund;
+
+    public Fund getFund() {
+    	return fund;
+    }
 
     public CustomerPosition() {
     }
@@ -24,14 +34,6 @@ public class CustomerPosition implements Serializable {
     public void setFundsymbol(String fundsymbol) {
     	this.fundsymbol = fundsymbol;
     }
-
-    public String getFundname() {
-    	return fundname;
-    }
-    public void setFundname(String fundname) {
-    	this.fundname = fundname;
-    }
-
     public int getShares() {
     	return shares;
     }

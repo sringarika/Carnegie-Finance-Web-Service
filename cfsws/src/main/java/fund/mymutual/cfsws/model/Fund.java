@@ -3,7 +3,6 @@ import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -14,7 +13,7 @@ public class Fund {
     private String fundname;
     private int fundprice; //in cents
     private String funddate;
-
+    
     
     public Fund() {
     }

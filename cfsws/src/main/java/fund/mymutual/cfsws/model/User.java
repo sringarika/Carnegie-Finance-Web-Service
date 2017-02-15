@@ -29,7 +29,7 @@ public class User {
     private CFSRole role;
 
     @OneToMany(mappedBy ="username")   
-    Set<CustomerPosition> customerposition;
+    private Set<CustomerPosition> customerposition;
     
     public Set<CustomerPosition> getCustomerpositions() {
 		return customerposition;
