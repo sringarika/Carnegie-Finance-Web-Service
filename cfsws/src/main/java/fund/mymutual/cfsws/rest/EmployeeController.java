@@ -79,8 +79,18 @@ public class EmployeeController {
         BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
         bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = bigDecimal.intValueExact();
-        customer.setCash(cashInCents);
         
+        customer.setFirstName(customerDTO.getFname());
+        customer.setLastName(customerDTO.getLname());
+        customer.setAddress(customerDTO.getAddress());
+        customer.setCash(cashInCents);
+        customer.setCity(customerDTO.getCity());
+        customer.setEmail(customerDTO.getEmail());
+        customer.updatePassword(customerDTO.getPassword());
+        customer.setState(customerDTO.getState());
+        customer.setUsername(customerDTO.getUsername());
+        customer.setZip(customerDTO.getZip());
+        customer.setRole(CFSRole.Customer);
         employeeService.createCustomer(customer);
         return new MessageDTO(customerDTO.getFname() + " was registered successfully");
         
