@@ -72,8 +72,8 @@ public class EmployeeController {
     }
 
     
-    @RequestMapping(value="/createCustomer", method=RequestMethod.POST)
-    public MessageDTO createCustomer(@ModelAttribute("username") String userName, 
+    @RequestMapping(value="/createCustomerAccount", method=RequestMethod.POST)
+    public MessageDTO createCustomerAccount(@ModelAttribute("username") String userName, 
                                     @RequestBody CustomerDTO customerDTO) throws BusinessLogicException{
         User customer = new User();
         BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
