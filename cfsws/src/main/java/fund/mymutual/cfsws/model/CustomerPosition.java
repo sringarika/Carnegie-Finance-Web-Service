@@ -1,7 +1,5 @@
 package fund.mymutual.cfsws.model;
 import java.io.Serializable;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,7 +9,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="cfs_customerposition")
 public class CustomerPosition implements Serializable{
-    @Id
+	private static final long serialVersionUID = 1L;
+	@Id
     private String fundsymbol;
     private int shares; //should be a whole number
     @Id
