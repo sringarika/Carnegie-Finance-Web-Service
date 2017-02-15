@@ -89,7 +89,6 @@ public class CustomerServiceImpl implements CustomerService {
             } else {
                 position = new CustomerPosition();
                 position.setFundsymbol(fund.getFundsymbol());
-                position.setFundname(fund.getFundname());
                 position.setUsername(user.getUsername());
                 position.setShares(shares);
                 em.persist(position);

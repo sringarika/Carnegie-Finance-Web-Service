@@ -57,7 +57,6 @@ public class CustomerServiceImplTest {
             CustomerPosition position2 = new CustomerPosition();
             position2.setUsername("example");
             position2.setFundsymbol("fund2");
-            position2.setFundname("Fund 2");
             position2.setShares(123);
             em.persist(position2);
         });
