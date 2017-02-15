@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
@@ -21,6 +23,7 @@ public class CFSErrorHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.OK)
+    @Order(100)
     @ResponseBody
     public MessageDTO processValidationError(MethodArgumentNotValidException ex, HttpServletRequest request) {
         logException(request, ex);
@@ -30,6 +33,7 @@ public class CFSErrorHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @Order(100)
     public MessageDTO processValidationError(HttpMessageNotReadableException ex, HttpServletRequest request) {
         logException(request, ex);
         return new MessageDTO("The input you provided is not valid");
@@ -38,6 +42,7 @@ public class CFSErrorHandler {
     @ExceptionHandler(CFSUnauthorizedException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @Order(100)
     public MessageDTO processUnauthorizedException(CFSUnauthorizedException ex, HttpServletRequest request) {
         logException(request, ex);
         return new MessageDTO("You are not currently logged in");
@@ -46,14 +51,37 @@ public class CFSErrorHandler {
     @ExceptionHandler(CFSForbiddenException.class)
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
+    @Order(100)
     public MessageDTO processForbiddenException(CFSForbiddenException ex, HttpServletRequest request) {
         logException(request, ex);
         if (ex.getRoleRequired().equals(CFSRole.Employee)) {
             return new MessageDTO("You must be an employee to perform this action");
         } else {
-            // TODO: There's a spelling error (an -> a) in the Specification. Please verify with client.
-            return new MessageDTO("You must be an customer to perform this action");
+            return new MessageDTO("You must be a customer to perform this action");
         }
+    }
+
+
+    /**
+     * A catch-all exception handler as a last resort.
+     * @param ex The exception.
+     * @param request The HTTP request.
+     * @return A default message.
+     */
+    @ExceptionHandler(value = {Exception.class, RuntimeException.class})
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @Order(Ordered.LOWEST_PRECEDENCE)
+    public MessageDTO processException(Exception ex, HttpServletRequest request) {
+        try {
+            System.out.println("Exception when handling " + request.getMethod() + " " + request.getRequestURI() +
+                    ": " + ex.getClass().getName());
+            String message = ex.getMessage();
+            if (message != null) System.out.println(message);
+        } catch (Throwable e) {
+
+        }
+        return new MessageDTO("The input you provided is not valid");
     }
 
     private void logException(HttpServletRequest request, MethodArgumentNotValidException ex) {

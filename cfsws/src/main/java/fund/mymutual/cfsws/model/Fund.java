@@ -15,32 +15,32 @@ public class Fund {
 
     public Fund() {
     }
-    
+
     public String getFundsymbol() {
     	return fundsymbol;
     }
     public void setFundsymbol(String fundsymbol) {
-    	fundsymbol = this.fundsymbol;
+    	this.fundsymbol = fundsymbol;
     }
-    
+
     public String getFundname() {
     	return fundname;
     }
     public void setFundname(String fundname) {
-    	fundname = this.fundname;
+    	this.fundname = fundname;
     }
-    
+
     public int getFundprice() {
     	return fundprice;
     }
     public void setFundprice(int fundprice) {
-    	fundprice = this.fundprice;
+    	this.fundprice = fundprice;
     }
-    
+
     public String getFunddate() {
     	return funddate;
     }
     public void setFunddate(String funddate) {
-    	funddate = this.funddate;
+    	this.funddate = funddate;
     }
 }

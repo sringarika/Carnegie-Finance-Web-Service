@@ -3,6 +3,7 @@ package fund.mymutual.cfsws;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import fund.mymutual.cfsws.model.CFSRole;
 import fund.mymutual.cfsws.model.JpaUtil;
 import fund.mymutual.cfsws.model.User;
 
@@ -16,18 +17,20 @@ public class Application {
     private static void seedDB() {
         // Add initial user. This is the only required initial user in specification.
         JpaUtil.transaction(em -> {
-            if (em.find(User.class, "jadmin") != null) return;
-            User jadmin = new User();
+            User jadmin = em.find(User.class, "jadmin");
+            if (jadmin != null) {
+                em.remove(jadmin);
+            }
+            jadmin = new User();
             jadmin.setUsername("jadmin");
             jadmin.setFirstName("Jane");
             jadmin.setLastName("Admin");
             jadmin.updatePassword("admin");
-            // TODO: Set the following fields.
-            // Address: 123 Main street
-            // City: Pittsburgh
-            // State: Pa
-            // Zip: 15143
-
+            jadmin.setAddress("123 Main street");
+            jadmin.setCity("Pittsburgh");
+            jadmin.setState("Pa");
+            jadmin.setZip("15143");
+            jadmin.setRole(CFSRole.Employee);
             em.persist(jadmin);
         });
     }
