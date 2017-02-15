@@ -59,7 +59,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public boolean buyFund(String username, String symbol, int cashInCents) throws BusinessLogicException {
+    public int buyFund(String username, String symbol, int cashInCents) throws BusinessLogicException {
         return JpaUtil.transaction(em -> {
             User user = em.find(User.class, username, LockModeType.PESSIMISTIC_WRITE);
             if (user == null) {
@@ -71,12 +71,13 @@ public class CustomerServiceImpl implements CustomerService {
             }
 
             if (user.getCash() < cashInCents) {
-                return false;
+                // Not enough balance.
+                return -1;
             }
             int shares = cashInCents / fund.getFundprice();
             if (shares == 0) {
-                // TODO: What now? Check this once requirements are updated.
-                throw new BusinessLogicException("The cash is not enough to buy any shares!");
+                // A whole share would cost more than cashInCents, so no shares can be bought.
+                return 0;
             }
 
             int totalCents = shares * fund.getFundprice();
@@ -93,7 +94,7 @@ public class CustomerServiceImpl implements CustomerService {
                 position.setShares(shares);
                 em.persist(position);
             }
-            return true;
+            return shares;
         });
     }
 

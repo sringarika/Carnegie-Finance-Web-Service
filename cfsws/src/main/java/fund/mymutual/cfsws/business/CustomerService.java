@@ -15,9 +15,10 @@ public interface CustomerService {
      * @param symbol The symbol of the fund to buy.
      * @param cashInCents The max cash amount to pay, in cents. (e.g. 123 for $1.23)
      * @throws BusinessLogicException if username does not exist or is not a customer.
-     * @return True if purchase successful, false if not enough balance.
+     * @return The number of shares bough, or -1 if cashInCents is more than the balance.
+     *          When the price of the fund is more than cashInCents, the result is 0.
      */
-    boolean buyFund(String username, String symbol, int cashInCents) throws BusinessLogicException;
+    int buyFund(String username, String symbol, int cashInCents) throws BusinessLogicException;
 
     /**
      * Sell a fund for a customer.

@@ -74,8 +74,8 @@ public class CustomerServiceImplTest {
 
     @Test
     public void testBuyFund() throws BusinessLogicException {
-        boolean result = customerService.buyFund("example", "fund1", 123);
-        Assert.assertTrue(result);
+        int shares = customerService.buyFund("example", "fund1", 123);
+        Assert.assertEquals(1, shares);
         User user = JpaUtil.transaction(em -> (em.find(User.class, "example")));
         Assert.assertEquals(0, user.getCash());
         CustomerPosition position = customerService.getPosition("example", "fund1");
@@ -84,8 +84,8 @@ public class CustomerServiceImplTest {
 
     @Test
     public void testBuyFundSymbolIgnoreCase() throws BusinessLogicException {
-        boolean result = customerService.buyFund("example", "fUNd1", 123);
-        Assert.assertTrue(result);
+        int shares = customerService.buyFund("example", "fUNd1", 123);
+        Assert.assertEquals(1, shares);
         User user = JpaUtil.transaction(em -> (em.find(User.class, "example")));
         Assert.assertEquals(0, user.getCash());
         CustomerPosition position = customerService.getPosition("example", "fund1");
@@ -97,8 +97,8 @@ public class CustomerServiceImplTest {
         JpaUtil.transaction(em -> {
             em.find(User.class, "example").setCash(456);
         });
-        boolean result = customerService.buyFund("example", "fund2", 123);
-        Assert.assertTrue(result);
+        int shares = customerService.buyFund("example", "fund2", 123);
+        Assert.assertEquals(1, shares);
         User user = JpaUtil.transaction(em -> (em.find(User.class, "example")));
         Assert.assertEquals(456 - 123, user.getCash());
         CustomerPosition position = customerService.getPosition("example", "fund2");
@@ -107,16 +107,16 @@ public class CustomerServiceImplTest {
 
     @Test
     public void testBuyFundNotEnoughCash() throws BusinessLogicException {
-        boolean result = customerService.buyFund("example", "fund1", 456);
-        Assert.assertFalse(result);
+        int shares = customerService.buyFund("example", "fund1", 456);
+        Assert.assertEquals(-1, shares);
         User user = JpaUtil.transaction(em -> (em.find(User.class, "example")));
         Assert.assertEquals(123, user.getCash());
     }
 
     @Test
     public void testBuyFundZeroShare() throws BusinessLogicException {
-        Assert.fail("Pending requirement");
-        // customerService.buyFund("example", "fund1", 12);
+        int shares = customerService.buyFund("example", "fund1", 12);
+        Assert.assertEquals(0, shares);
     }
 
     @Test
