@@ -51,8 +51,7 @@ public class CFSErrorHandler {
         if (ex.getRoleRequired().equals(CFSRole.Employee)) {
             return new MessageDTO("You must be an employee to perform this action");
         } else {
-            // TODO: There's a spelling error (an -> a) in the Specification. Please verify with client.
-            return new MessageDTO("You must be an customer to perform this action");
+            return new MessageDTO("You must be a customer to perform this action");
         }
     }
 
