@@ -49,11 +49,6 @@ public class EmployeeController {
     public MessageDTO exampleEmployee(@ModelAttribute("username") String username) {
         return new MessageDTO("Hello, " + username + "!");
     }
-    
-    @RequestMapping(value="/logout", method=RequestMethod.POST)
-    public MessageDTO logout(@ModelAttribute("username") String username) {
-        return new MessageDTO("You have been successfully logged out");
-    }
 
     @RequestMapping(value="/transitionDay", method=RequestMethod.POST)
     public MessageDTO transitionDay(@ModelAttribute("username") String username) {

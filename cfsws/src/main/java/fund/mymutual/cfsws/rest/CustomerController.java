@@ -53,12 +53,7 @@ public class CustomerController {
     public MessageDTO exampleCustomer(@ModelAttribute("username") String username) {
         return new MessageDTO("Hello, " + username + "!");
     }
-    
-    @RequestMapping(value="/logout", method=RequestMethod.POST)
-    public MessageDTO logout(@ModelAttribute("username") String username) {
-        return new MessageDTO("You have been successfully logged out");
-    }
-    
+
     @RequestMapping(value="/viewPortfolio", method = RequestMethod.GET)
     public ViewPortfolioDTO viewPortfolio(@ModelAttribute("username") String username,
                                           @RequestBody Portfolio portfolio) {
