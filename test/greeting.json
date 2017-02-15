@@ -1,0 +1,35 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "phases": [
+      {"duration": 10, "arrivalCount": 10000}
+    ],
+    "payload": [
+    {
+      "path": "UserData.csv",
+      "fields": ["fname","lname","address","city","state","zip","email","username", "password"],
+      "order": "sequence"
+    },
+    {
+      "path": "Portfolio.csv",
+      "fields": ["name","symbol","initial_value"],
+      "order": "sequence"
+    }
+  ]
+  },
+  "scenarios": [
+    {
+      "name": "web service task sample test plan",
+      "flow": [
+        {"get": {
+          "url": "/greeting",
+          "match":{
+            "json":"$.message",
+            "value":"Hello from CFS!"
+          }
+         }
+       }
+      ]
+    }
+  ]
+}
