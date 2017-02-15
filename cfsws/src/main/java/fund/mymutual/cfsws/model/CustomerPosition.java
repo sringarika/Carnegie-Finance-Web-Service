@@ -11,13 +11,11 @@ import javax.persistence.Table;
 @Table(name="cfs_customerposition")
 public class CustomerPosition implements Serializable{
 	private static final long serialVersionUID = 1L;
-	@Id
-    private String fundsymbol;
     private int shares; //should be a whole number
     @Id
     private String username;
 
-
+    @Id
     @ManyToOne
     @JoinColumn(name = "fundsymbol")
     private Fund fund;
@@ -26,15 +24,13 @@ public class CustomerPosition implements Serializable{
     	return fund;
     }
 
+    public void setFund(Fund fund) {
+        this.fund = fund;
+    }
+
     public CustomerPosition() {
     }
 
-    public String getFundsymbol() {
-    	return fundsymbol;
-    }
-    public void setFundsymbol(String fundsymbol) {
-    	this.fundsymbol = fundsymbol;
-    }
     public int getShares() {
     	return shares;
     }

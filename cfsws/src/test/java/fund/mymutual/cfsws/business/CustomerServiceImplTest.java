@@ -2,6 +2,7 @@ package fund.mymutual.cfsws.business;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -22,9 +23,9 @@ public class CustomerServiceImplTest {
         customerService = new CustomerServiceImpl();
 
         JpaUtil.transaction(em -> {
+            em.createQuery("DELETE FROM CustomerPosition").executeUpdate();
             em.createQuery("DELETE FROM User").executeUpdate();
             em.createQuery("DELETE FROM Fund").executeUpdate();
-            em.createQuery("DELETE FROM CustomerPosition").executeUpdate();
 
             User user = new User();
             user.setUsername("example");
@@ -56,7 +57,7 @@ public class CustomerServiceImplTest {
 
             CustomerPosition position2 = new CustomerPosition();
             position2.setUsername("example");
-            position2.setFundsymbol("fund2");
+            position2.setFund(fund2);
             position2.setShares(123);
             em.persist(position2);
         });
@@ -67,8 +68,17 @@ public class CustomerServiceImplTest {
     }
 
     @Test
-    public void testGetPortfolio() {
-        Assert.fail("Not yet implemented");
+    public void testGetPortfolio() throws BusinessLogicException {
+        Portfolio portfolio = customerService.getPortfolio("example");
+        Assert.assertNotNull(portfolio);
+        Assert.assertEquals(123, portfolio.getCashInCents());
+        List<Position> positions = portfolio.getPositions();
+        Assert.assertNotNull(positions);
+        Assert.assertEquals(1, positions.size());
+        Position position = positions.get(0);
+        Assert.assertEquals(123, position.getShares());
+        Assert.assertEquals("Fund 2", position.getName());
+        Assert.assertEquals(123, position.getPriceInCents());
     }
 
     @Test

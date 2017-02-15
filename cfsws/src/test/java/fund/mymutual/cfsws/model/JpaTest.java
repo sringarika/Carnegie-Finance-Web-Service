@@ -14,6 +14,7 @@ public class JpaTest extends TestCase {
 
     public void testUser() {
         JpaUtil.transaction(em -> {
+            em.createQuery("DELETE FROM CustomerPosition").executeUpdate();
             em.createQuery("DELETE FROM User").executeUpdate();
 
             User john = new User();

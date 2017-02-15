@@ -20,6 +20,7 @@ public class EmployeeServiceImplTest {
     public void setUp() throws Exception {
         employeeService = new EmployeeServiceImpl();
         JpaUtil.transaction(em -> {
+            em.createQuery("DELETE FROM CustomerPosition").executeUpdate();
             em.createQuery("DELETE FROM User").executeUpdate();
             em.createQuery("DELETE FROM Fund").executeUpdate();
 
