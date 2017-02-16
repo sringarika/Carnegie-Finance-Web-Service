@@ -237,7 +237,7 @@
         },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"someonedoesntexist", "value":"11.01"},
+        "json": {"username":"someonedoesntexist", "value":"11.01"},
         "match":{
           "json":"$.message",
           "value":"You are not currently logged in"
@@ -290,7 +290,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"someonedoesntexist", "value":"11.01"},
+        "json": {"username":"someonedoesntexist", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"You must be an employee to perform this action"
@@ -396,7 +396,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"zhisuocao", "value":"11.01"},
+        "json": {"username":"zhisuocao", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
@@ -405,7 +405,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"someonedoesntexist", "value":"11.01"},
+        "json": {"username":"someonedoesntexist", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
@@ -414,7 +414,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"zhisuocao", "value":"11"},
+        "json": {"username":"zhisuocao", "cash":"11"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
@@ -423,7 +423,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"", "value":"11.01"},
+        "json": {"username":"", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
@@ -432,7 +432,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"zhisuocao", "value":""},
+        "json": {"username":"zhisuocao", "cash":""},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
@@ -441,7 +441,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"", "value":""},
+        "json": {"username":"", "cash":""},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
