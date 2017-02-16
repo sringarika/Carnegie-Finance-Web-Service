@@ -4,12 +4,13 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import fund.mymutual.cfsws.business.Position;
 
 public class ViewPortfolioDTO extends MessageDTO {
-    
+    @NotEmpty
     private String message;
     
     @NotEmpty

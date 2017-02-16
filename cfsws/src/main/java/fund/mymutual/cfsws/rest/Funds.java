@@ -1,8 +1,17 @@
 package fund.mymutual.cfsws.rest;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class Funds {
+    @NotEmpty
+    @Length(max = 100)
     private String name;
+    @NotEmpty
+    @Length(max = 100)
     private String shares;
+    @NotEmpty
+    @Length(max = 100)
     private String price;
     
     public String getName() {
