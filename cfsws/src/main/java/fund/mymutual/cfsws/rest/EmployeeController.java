@@ -60,15 +60,17 @@ public class EmployeeController {
     @RequestMapping(value="/depositCheck", method=RequestMethod.POST)
     public MessageDTO depositCheck(@ModelAttribute("username") String username, 
                                    @RequestBody DepositCheckDTO depositCheckDTO) throws BusinessLogicException {
-        if (Integer.valueOf(depositCheckDTO.getCash()) <= 0) {
-            return new MessageDTO("The input you provided is not valid");
-        }
+
         BigDecimal bigDecimal = new BigDecimal(depositCheckDTO.getCash());
         bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = bigDecimal.intValueExact();
-                
-        employeeService.depositCheck(depositCheckDTO.getUsername(), cashInCents);
-        return new MessageDTO("The check was successfully deposited");
+        
+        if (cashInCents <= 0) {
+            return new MessageDTO("The input you provided is not valid");
+        } else {      
+            employeeService.depositCheck(depositCheckDTO.getUsername(), cashInCents);
+            return new MessageDTO("The check was successfully deposited");
+        }
     }
 
     

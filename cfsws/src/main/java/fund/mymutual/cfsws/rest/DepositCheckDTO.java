@@ -1,7 +1,5 @@
 package fund.mymutual.cfsws.rest;
 
-import javax.validation.constraints.Pattern;
-
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -11,7 +9,6 @@ public class DepositCheckDTO {
     private String username;
     
     @NotEmpty
-    @Pattern(regexp = "\\d+\\.\\d{2}")
     private String cash;
     
     
