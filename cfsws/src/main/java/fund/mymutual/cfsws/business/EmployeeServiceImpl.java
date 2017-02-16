@@ -15,7 +15,7 @@ import fund.mymutual.cfsws.model.User;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
-    public void createCustomer(User customer) throws BusinessLogicException {
+    public void createCustomerAccount(User customer) throws BusinessLogicException {
         JpaUtil.transaction(em -> {
             User user = em.find(User.class, customer.getUsername(), LockModeType.PESSIMISTIC_WRITE);
             if (user != null) {

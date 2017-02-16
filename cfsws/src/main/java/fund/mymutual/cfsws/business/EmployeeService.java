@@ -8,7 +8,7 @@ public interface EmployeeService {
      * @param customer The customer to create.
      * @throws BusinessLogicException if customer username already exists.
      */
-    void createCustomer(User customer) throws BusinessLogicException;
+    void createCustomerAccount(User customer) throws BusinessLogicException;
 
     /**
      * Deposit check for a customer.

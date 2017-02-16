@@ -91,7 +91,7 @@ public class EmployeeController {
         customer.setUsername(customerDTO.getUsername());
         customer.setZip(customerDTO.getZip());
         customer.setRole(CFSRole.Customer);
-        employeeService.createCustomer(customer);
+        employeeService.createCustomerAccount(customer);
         return new MessageDTO(customerDTO.getFname() + " was registered successfully");
         
     }

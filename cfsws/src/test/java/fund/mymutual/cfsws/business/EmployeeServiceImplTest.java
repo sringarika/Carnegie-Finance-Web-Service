@@ -65,7 +65,7 @@ public class EmployeeServiceImplTest {
         user.setZip("123451");
         user.setCash(1231);
         user.setRole(CFSRole.Customer);
-        employeeService.createCustomer(user);
+        employeeService.createCustomerAccount(user);
         User result = JpaUtil.transaction(em -> (em.find(User.class, "example1")));
         Assert.assertNotNull(result);
         Assert.assertEquals(user.getFirstName(), result.getFirstName());
@@ -86,7 +86,7 @@ public class EmployeeServiceImplTest {
             user.setZip("123452");
             user.setCash(1232);
             user.setRole(CFSRole.Customer);
-            employeeService.createCustomer(user);
+            employeeService.createCustomerAccount(user);
             Assert.fail("Create customer should not allow duplicate username");
         } catch (BusinessLogicException e) {
             return;
