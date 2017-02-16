@@ -66,7 +66,7 @@ public class EmployeeController {
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = newCash.intValueExact();
 
-        if (cashInCents <= 0) {
+        if (cashInCents < 0) {
             return new MessageDTO("The input you provided is not valid");
         } else {
             employeeService.depositCheck(depositCheckDTO.getUsername(), cashInCents);

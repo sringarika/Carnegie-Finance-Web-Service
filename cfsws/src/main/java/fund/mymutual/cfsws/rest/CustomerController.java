@@ -115,6 +115,9 @@ public class CustomerController {
     public MessageDTO sellFund(@ModelAttribute("username") String username, @Valid @RequestBody SellFundDTO sellFundDTO)
                                throws BusinessLogicException {
         int shares = Integer.parseInt(sellFundDTO.getNumShares());
+        if (shares < 0) {
+            return new MessageDTO("The input you provided is not valid");
+        }
         boolean result = true;
         result = customerService.sellFund(username, sellFundDTO.getSymbol(), shares);
         if (result == true) {
@@ -131,10 +134,13 @@ public class CustomerController {
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = newCash.intValueExact();
         boolean result = true;
+        if (cashInCents < 0) {
+            return new MessageDTO("The input you provided is not valid");
+        }
 
         result = customerService.requestCheck(username, cashInCents);
         if (result == true) {
-            return new MessageDTO("The check has been successfully requeste");
+            return new MessageDTO("The check has been successfully requested");
         } else {
             return new MessageDTO("You don’t have sufficient funds in your account to cover the requested check");
         }
