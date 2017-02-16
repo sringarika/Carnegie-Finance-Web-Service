@@ -55,7 +55,7 @@ public class EmployeeController {
     public MessageDTO transitionDay(@ModelAttribute("username") String username) {
         employeeService.transitionDay();
 
-        return new MessageDTO("The fund was prices have been successfully recalculated");
+        return new MessageDTO("The fund prices have been successfully recalculated");
     }
 
     @RequestMapping(value="/depositCheck", method=RequestMethod.POST)
