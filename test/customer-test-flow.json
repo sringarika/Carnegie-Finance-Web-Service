@@ -192,6 +192,24 @@
          }
        },
        {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"100.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be a customer to perform this action"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"CMU","numShares":"11"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be a customer to perform this action"
+          }
+         }
+       },
+       {"post": {
         "url": "/logout",
         "match":{
           "json":"$.message",
@@ -202,6 +220,24 @@
        {"post": {
           "url": "/buyFund",
           "json": {"symbol":"TB","cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"100.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"CMU","numShares":"11"},
           "match":{
             "json":"$.message",
             "value":"You are not currently logged in"
@@ -300,7 +336,97 @@
        },
        {"post": {
           "url": "/buyFund",
-          "json": {"symbol":"","cashValue":""},
+          "json": {"symbol":"CMU","cashValue":"-188.88"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"100.01"},
+          "match":{
+            "json":"$.message",
+            "value":"The check has been successfully requested"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"400.01"},
+          "match":{
+            "json":"$.message",
+            "value":"The check has been successfully requested"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"-100.01"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"CMU","numShares":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The shares have been successfully sold"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"OSU","numShares":"3"},
+          "match":{
+            "json":"$.message",
+            "value":"The shares have been successfully sold"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"OSU","numShares":"100"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have that many shares in your portfolio"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"OSU","numShares":"-100"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"","numShares":"-100"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"OSU","numShares":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"","numShares":""},
           "match":{
             "json":"$.message",
             "value":"The input you provided is not valid"
