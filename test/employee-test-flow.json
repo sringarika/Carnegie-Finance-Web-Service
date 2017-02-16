@@ -211,6 +211,15 @@
           }
         },
         {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"-100","username":"zhisuocao2","password":"123456"},
+           "match":{
+             "json":"$.message",
+             "value":"The input you provided is not valid"
+           }
+          }
+        },
+        {"post": {
             "url": "/logout",
             "match":{
               "json":"$.message",
@@ -360,6 +369,15 @@
        },
        {"post": {
         "url": "/createFund",
+        "json": {"name":"Iphone 8", "symbol":"P8", "initial_value":"-11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
         "json": {"name":"Carnegie Mellon2", "symbol":"CMU", "initial_value":"11.01"},
         "match":{
           "json":"$.message",
@@ -379,6 +397,15 @@
        {"post": {
         "url": "/createFund",
         "json": {"name":"Carnegie Mellonlalla", "symbol":"", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"Coca cola", "COKE":"", "initial_value":"0"},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
@@ -423,6 +450,15 @@
        },
        {"post": {
         "url": "/depositCheck",
+        "json": {"username":"varun", "cash":"-11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+       },
+       {"post": {
+        "url": "/depositCheck",
         "json": {"username":"", "cash":"11.01"},
         "match":{
           "json":"$.message",
@@ -450,6 +486,7 @@
        },
        {"post": {
         "url": "/transitionDay",
+        "json": {},
         "match":{
           "json":"$.message",
           "value":"The fund prices have been successfully recalculated"
