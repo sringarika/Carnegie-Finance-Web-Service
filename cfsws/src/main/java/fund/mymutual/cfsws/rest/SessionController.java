@@ -66,7 +66,7 @@ public class SessionController {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public MessageDTO processValidationError(Exception ex, HttpServletRequest request) {
         try {
-            System.out.println("Exception when handling POST /login: " + ex.getClass().getName());
+            System.out.println("Exception when handling " + request.getRequestURI() +  ": " + ex.getClass().getName());
             String message = ex.getMessage();
             if (message != null) System.out.println(message);
         } catch (Throwable e) {
