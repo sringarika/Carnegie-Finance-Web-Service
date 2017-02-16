@@ -96,7 +96,7 @@ public class CustomerController {
         BigDecimal bigDecimal = new BigDecimal(buyFundDTO.getCashValue());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashValueInCents = newCash.intValueExact();
-        if (cashValueInCents <= 0) {
+        if (cashValueInCents < 0) {
             return new MessageDTO("The input you provided is not valid");
         }
 
