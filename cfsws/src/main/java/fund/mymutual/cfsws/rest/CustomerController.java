@@ -88,8 +88,8 @@ public class CustomerController {
     public MessageDTO buyFund(@ModelAttribute("username") String username, @RequestBody BuyFundDTO buyFundDTO) 
                             throws BusinessLogicException {
         BigDecimal bigDecimal = new BigDecimal(buyFundDTO.getCashValue());
-        bigDecimal.scaleByPowerOfTen(2);
-        int cashValueInCents = bigDecimal.intValueExact();
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int cashValueInCents = newCash.intValueExact();
     
         int result = customerService.buyFund(username, buyFundDTO.getSymbol(), cashValueInCents);
         if (result > 0) {
@@ -119,8 +119,8 @@ public class CustomerController {
     public MessageDTO requestCheck(@ModelAttribute("username") String username, 
                                    @RequestBody RequestCheckDTO requestCheckDTO) throws BusinessLogicException {
         BigDecimal bigDecimal = new BigDecimal(requestCheckDTO.getCashValue());
-        bigDecimal.scaleByPowerOfTen(2);
-        int cashInCents = bigDecimal.intValueExact();
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int cashInCents = newCash.intValueExact();
         boolean result = true;
     
         result = customerService.requestCheck(username, cashInCents);

@@ -62,8 +62,8 @@ public class EmployeeController {
                                    @RequestBody DepositCheckDTO depositCheckDTO) throws BusinessLogicException {
 
         BigDecimal bigDecimal = new BigDecimal(depositCheckDTO.getCash());
-        bigDecimal.scaleByPowerOfTen(2);
-        int cashInCents = bigDecimal.intValueExact();
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int cashInCents = newCash.intValueExact();
         
         if (cashInCents <= 0) {
             return new MessageDTO("The input you provided is not valid");
@@ -79,8 +79,8 @@ public class EmployeeController {
                                     @RequestBody CustomerDTO customerDTO) throws BusinessLogicException{
         User customer = new User();
         BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
-        bigDecimal.scaleByPowerOfTen(2);
-        int cashInCents = bigDecimal.intValueExact();
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int cashInCents = newCash.intValueExact();
         
         customer.setFirstName(customerDTO.getFname());
         customer.setLastName(customerDTO.getLname());
@@ -103,8 +103,8 @@ public class EmployeeController {
                                     @RequestBody CreateFundDTO createFundDTO) throws BusinessLogicException {
         
         BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitial_value());
-        bigDecimal.scaleByPowerOfTen(2);
-        int initialValueInCents = bigDecimal.intValueExact();
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int initialValueInCents = newCash.intValueExact();
             
         employeeService.createFund(createFundDTO.getName(), createFundDTO.getSymbol(), initialValueInCents);
         return new MessageDTO("The fund was successfully created");
