@@ -68,7 +68,7 @@
        },
        {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0.00","username":"{{{username}}}","password":"{{password}}"},
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
            "match":{
              "json":"$.message",
              "value":"{{{fname}}} was registered successfully"
@@ -237,7 +237,7 @@
         },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"someonedoesntexist", "value":"11.01"},
+        "json": {"username":"someonedoesntexist", "value":"11.01"},
         "match":{
           "json":"$.message",
           "value":"You are not currently logged in"
@@ -290,7 +290,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"someonedoesntexist", "value":"11.01"},
+        "json": {"username":"someonedoesntexist", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"You must be an employee to perform this action"
@@ -334,6 +334,15 @@
        {"post": {
         "url": "/createFund",
         "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The fund was successfully created"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"Ohio State", "symbol":"OSU", "initial_value":"18"},
         "match":{
           "json":"$.message",
           "value":"The fund was successfully created"
@@ -387,7 +396,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"zhisuocao", "value":"11.01"},
+        "json": {"username":"zhisuocao", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
@@ -396,7 +405,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"someonedoesntexist", "value":"11.01"},
+        "json": {"username":"someonedoesntexist", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
@@ -405,7 +414,16 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"zhisuocao", "value":"11"},
+        "json": {"username":"zhisuocao", "cash":"11"},
+        "match":{
+          "json":"$.message",
+          "value":"The check was successfully deposited"
+           }
+         }
+       },
+       {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"", "cash":"11.01"},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
@@ -414,7 +432,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"", "value":"11.01"},
+        "json": {"username":"zhisuocao", "cash":""},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
@@ -423,16 +441,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"zhisuocao", "value":""},
-        "match":{
-          "json":"$.message",
-          "value":"The input you provided is not valid"
-           }
-         }
-       },
-       {"post": {
-        "url": "/depositCheck",
-        "json": {"username,":"", "value":""},
+        "json": {"username":"", "cash":""},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
