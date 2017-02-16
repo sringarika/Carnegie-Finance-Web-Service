@@ -68,7 +68,7 @@
        },
        {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0.00","username":"{{{username}}}","password":"{{password}}"},
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
            "match":{
              "json":"$.message",
              "value":"{{{fname}}} was registered successfully"
@@ -342,6 +342,15 @@
        },
        {"post": {
         "url": "/createFund",
+        "json": {"name":"Ohio State", "symbol":"OSU", "initial_value":"18"},
+        "match":{
+          "json":"$.message",
+          "value":"The fund was successfully created"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
         "json": {"name":"Carnegie Mellon", "symbol":"CMU2", "initial_value":"11.01"},
         "match":{
           "json":"$.message",
@@ -408,7 +417,7 @@
         "json": {"username,":"zhisuocao", "value":"11"},
         "match":{
           "json":"$.message",
-          "value":"The input you provided is not valid"
+          "value":"The check was successfully deposited"
            }
          }
        },
