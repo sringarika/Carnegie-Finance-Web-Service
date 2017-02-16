@@ -98,11 +98,11 @@ public class EmployeeController {
         
     }
     
-    @RequestMapping(value="/creatFund", method=RequestMethod.POST)
+    @RequestMapping(value="/createFund", method=RequestMethod.POST)
     public MessageDTO createFund(@ModelAttribute("username") String userName,
                                     @RequestBody CreateFundDTO createFundDTO) throws BusinessLogicException {
         
-        BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitialValue());
+        BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitial_value());
         bigDecimal.scaleByPowerOfTen(2);
         int initialValueInCents = bigDecimal.intValueExact();
             

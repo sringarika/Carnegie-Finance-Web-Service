@@ -14,7 +14,7 @@ public class CreateFundDTO {
     private String symbol;
     
     @NotEmpty
-    private String initialValue;
+    private String initial_value;
     
     public String getName() {
         return name;
@@ -30,10 +30,10 @@ public class CreateFundDTO {
         symbol = this.symbol;
     }
     
-    public String getInitialValue() {
-        return initialValue;
+    public String getInitial_value() {
+        return initial_value;
     }
-    public void setInitial_value(String initialValue) {
-        this.initialValue = initialValue;
+    public void setInitial_value(String initial_value) {
+        this.initial_value = initial_value;
     }
 }
