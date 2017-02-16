@@ -139,7 +139,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"zhisuocao", "value":"1000.01"},
+        "json": {"username":"zhisuocao", "cash":"1000.01"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
@@ -148,7 +148,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"junyi", "value":"1888.01"},
+        "json": {"username":"junyi", "cash":"1888.01"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
@@ -157,7 +157,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"varun", "value":"1888.01"},
+        "json": {"username":"varun", "cash":"1888.01"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
@@ -166,7 +166,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"yuchen", "value":"1000.01"},
+        "json": {"username":"yuchen", "cash":"1000.01"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
@@ -175,7 +175,7 @@
        },
        {"post": {
         "url": "/depositCheck",
-        "json": {"username,":"sring", "value":"2999.01"},
+        "json": {"username":"sring", "cash":"2999.01"},
         "match":{
           "json":"$.message",
           "value":"The check was successfully deposited"
