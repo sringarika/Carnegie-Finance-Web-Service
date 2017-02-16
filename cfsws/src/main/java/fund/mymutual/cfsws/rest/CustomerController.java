@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -56,7 +57,7 @@ public class CustomerController {
 
     @RequestMapping(value="/viewPortfolio", method = RequestMethod.GET)
     public ViewPortfolioDTO viewPortfolio(@ModelAttribute("username") String username,
-                                          @RequestBody Portfolio portfolio) {
+                                          @Valid @RequestBody Portfolio portfolio) {
 
         String cash = String.valueOf(portfolio.getCashInCents());
         if (cash.length() > 2) {
@@ -85,7 +86,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value="/buyFund", method=RequestMethod.POST)
-    public MessageDTO buyFund(@ModelAttribute("username") String username, @RequestBody BuyFundDTO buyFundDTO)
+    public MessageDTO buyFund(@ModelAttribute("username") String username, @Valid @RequestBody BuyFundDTO buyFundDTO)
                             throws BusinessLogicException {
         BigDecimal bigDecimal = new BigDecimal(buyFundDTO.getCashValue());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
@@ -103,7 +104,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value="/sellFund", method=RequestMethod.POST)
-    public MessageDTO sellFund(@ModelAttribute("username") String username, @RequestBody SellFundDTO sellFundDTO)
+    public MessageDTO sellFund(@ModelAttribute("username") String username, @Valid @RequestBody SellFundDTO sellFundDTO)
                                throws BusinessLogicException {
         int shares = Integer.parseInt(sellFundDTO.getNumShares());
         boolean result = true;
@@ -117,7 +118,7 @@ public class CustomerController {
 
     @RequestMapping(value="/requestCheck", method=RequestMethod.POST)
     public MessageDTO requestCheck(@ModelAttribute("username") String username,
-                                   @RequestBody RequestCheckDTO requestCheckDTO) throws BusinessLogicException {
+                                   @Valid @RequestBody RequestCheckDTO requestCheckDTO) throws BusinessLogicException {
         BigDecimal bigDecimal = new BigDecimal(requestCheckDTO.getCashValue());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = newCash.intValueExact();

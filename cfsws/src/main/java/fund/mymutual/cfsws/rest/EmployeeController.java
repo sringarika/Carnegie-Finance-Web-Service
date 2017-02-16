@@ -3,6 +3,7 @@ package fund.mymutual.cfsws.rest;
 import java.math.BigDecimal;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -59,7 +60,7 @@ public class EmployeeController {
 
     @RequestMapping(value="/depositCheck", method=RequestMethod.POST)
     public MessageDTO depositCheck(@ModelAttribute("username") String username,
-                                   @RequestBody DepositCheckDTO depositCheckDTO) throws BusinessLogicException {
+                                   @Valid @RequestBody DepositCheckDTO depositCheckDTO) throws BusinessLogicException {
 
         BigDecimal bigDecimal = new BigDecimal(depositCheckDTO.getCash());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
@@ -75,8 +76,8 @@ public class EmployeeController {
 
 
     @RequestMapping(value="/createCustomerAccount", method=RequestMethod.POST)
-    public MessageDTO createCustomerAccount(@ModelAttribute("username") String userName,
-                                    @RequestBody CustomerDTO customerDTO) throws BusinessLogicException{
+    public MessageDTO createCustomerAccount(@ModelAttribute("username") String username,
+                                            @Valid @RequestBody CustomerDTO customerDTO) throws BusinessLogicException{
         User customer = new User();
         BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
@@ -99,8 +100,8 @@ public class EmployeeController {
     }
 
     @RequestMapping(value="/createFund", method=RequestMethod.POST)
-    public MessageDTO createFund(@ModelAttribute("username") String userName,
-                                    @RequestBody CreateFundDTO createFundDTO) throws BusinessLogicException {
+    public MessageDTO createFund(@ModelAttribute("username") String username,
+                                 @Valid @RequestBody CreateFundDTO createFundDTO) throws BusinessLogicException {
 
         BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitial_value());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
