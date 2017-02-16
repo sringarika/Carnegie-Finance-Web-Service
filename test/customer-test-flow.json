@@ -381,7 +381,7 @@
        },
        {"post": {
           "url": "/sellFund",
-          "json": {"symbol":"OSU","numShares":"3"},
+          "json": {"symbol":"OSU","numShares":"2"},
           "match":{
             "json":"$.message",
             "value":"The shares have been successfully sold"
