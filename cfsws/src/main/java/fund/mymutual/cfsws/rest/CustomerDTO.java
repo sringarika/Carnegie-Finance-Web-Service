@@ -1,15 +1,39 @@
 package fund.mymutual.cfsws.rest;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class CustomerDTO {
+    
+    @NotEmpty
+    @Length(max = 100)
     private String username;
+    @NotEmpty
+    @Length(max = 100)
     private String password;
+    @NotEmpty
+    @Length(max = 100)
     private String fname;
+    @NotEmpty
+    @Length(max = 100)
     private String lname;
+    @NotEmpty
+    @Length(max = 100)
     private String address;
+    @NotEmpty
+    @Length(max = 100)
     private String city;
+    @NotEmpty
+    @Length(max = 100)
     private String state;
+    @NotEmpty
+    @Length(max = 100)
     private String zip;
+    @NotEmpty
+    @Length(max = 100)
     private String email;
+    @NotEmpty
+    @Length(max = 100)
     private String cash;
     
     public String getUsername() {
