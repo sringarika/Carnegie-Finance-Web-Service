@@ -25,6 +25,9 @@ public class JpaUtil {
                             "?useUnicode=true&characterEncoding=utf8" +
                             "&user=" + userName + "&password=" + password;
                     config.put("javax.persistence.jdbc.url", jdbcUrl);
+                    config.put("hibernate.hbm2ddl.auto", "validate");
+                    config.put("hibernate.show_sql", "false");
+                    config.put("hibernate.format_sql", "false");
                 }
                 entityManagerFactory = Persistence.createEntityManagerFactory("fund.mymutual.cfsws.model", config);
             } catch (Exception e) {

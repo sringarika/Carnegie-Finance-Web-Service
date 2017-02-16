@@ -22,6 +22,8 @@ import fund.mymutual.cfsws.model.User;
 
 @RestController
 public class LoginController {
+    public static final String AUTH_COOKIE = "CFSAuthToken";
+
     @Autowired
     private SessionService sessionService;
 
@@ -32,7 +34,7 @@ public class LoginController {
             return new MessageDTO("There seems to be an issue with the username/password combination that you entered");
         } else { // Successful login
             String authToken = sessionService.beginSession(user.getUsername());
-            Cookie cookie = new Cookie(SessionController.AUTH_COOKIE, authToken);
+            Cookie cookie = new Cookie(AUTH_COOKIE, authToken);
             cookie.setMaxAge(60 * 60 * 24);
             // TODO: Make the cookie expire after remaining idle for 15 minutes.
             // This basically means the cookie should be refreshed every time a response is sent.

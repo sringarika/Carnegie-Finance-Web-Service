@@ -1,14 +1,18 @@
 package fund.mymutual.cfsws.rest;
 
+import java.math.BigDecimal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fund.mymutual.cfsws.business.BusinessLogicException;
 import fund.mymutual.cfsws.business.EmployeeService;
 import fund.mymutual.cfsws.business.SessionService;
 import fund.mymutual.cfsws.model.CFSRole;
@@ -24,7 +28,7 @@ public class EmployeeController {
 
     @ModelAttribute("username")
     public String authenticateRequest(HttpServletRequest request,
-            @CookieValue(value=SessionController.AUTH_COOKIE, required=false) String authToken)
+            @CookieValue(value=LoginController.AUTH_COOKIE, required=false) String authToken)
             throws CFSUnauthorizedException, CFSForbiddenException {
         if (authToken == null) {
             throw new CFSUnauthorizedException();
@@ -49,6 +53,60 @@ public class EmployeeController {
     @RequestMapping(value="/transitionDay", method=RequestMethod.POST)
     public MessageDTO transitionDay(@ModelAttribute("username") String username) {
         employeeService.transitionDay();
+
         return new MessageDTO("The fund was prices have been successfully recalculated");
+    }
+
+    @RequestMapping(value="/depositCheck", method=RequestMethod.POST)
+    public MessageDTO depositCheck(@ModelAttribute("username") String username,
+                                   @RequestBody DepositCheckDTO depositCheckDTO) throws BusinessLogicException {
+
+        BigDecimal bigDecimal = new BigDecimal(depositCheckDTO.getCash());
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int cashInCents = newCash.intValueExact();
+
+        if (cashInCents <= 0) {
+            return new MessageDTO("The input you provided is not valid");
+        } else {
+            employeeService.depositCheck(depositCheckDTO.getUsername(), cashInCents);
+            return new MessageDTO("The check was successfully deposited");
+        }
+    }
+
+
+    @RequestMapping(value="/createCustomerAccount", method=RequestMethod.POST)
+    public MessageDTO createCustomerAccount(@ModelAttribute("username") String userName,
+                                    @RequestBody CustomerDTO customerDTO) throws BusinessLogicException{
+        User customer = new User();
+        BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int cashInCents = newCash.intValueExact();
+
+        customer.setFirstName(customerDTO.getFname());
+        customer.setLastName(customerDTO.getLname());
+        customer.setAddress(customerDTO.getAddress());
+        customer.setCash(cashInCents);
+        customer.setCity(customerDTO.getCity());
+        customer.setEmail(customerDTO.getEmail());
+        customer.updatePassword(customerDTO.getPassword());
+        customer.setState(customerDTO.getState());
+        customer.setUsername(customerDTO.getUsername());
+        customer.setZip(customerDTO.getZip());
+        customer.setRole(CFSRole.Customer);
+        employeeService.createCustomerAccount(customer);
+        return new MessageDTO(customerDTO.getFname() + " was registered successfully");
+
+    }
+
+    @RequestMapping(value="/createFund", method=RequestMethod.POST)
+    public MessageDTO createFund(@ModelAttribute("username") String userName,
+                                    @RequestBody CreateFundDTO createFundDTO) throws BusinessLogicException {
+
+        BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitial_value());
+        BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
+        int initialValueInCents = newCash.intValueExact();
+
+        employeeService.createFund(createFundDTO.getName(), createFundDTO.getSymbol(), initialValueInCents);
+        return new MessageDTO("The fund was successfully created");
     }
 }
