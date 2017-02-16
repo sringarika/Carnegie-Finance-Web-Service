@@ -32,7 +32,7 @@ public class CustomerController {
 
     @ModelAttribute("username")
     public String authenticateRequest(HttpServletRequest request,
-            @CookieValue(value=SessionController.AUTH_COOKIE, required=false) String authToken)
+            @CookieValue(value=LoginController.AUTH_COOKIE, required=false) String authToken)
             throws CFSUnauthorizedException, CFSForbiddenException {
         if (authToken == null) {
             throw new CFSUnauthorizedException();
@@ -57,7 +57,7 @@ public class CustomerController {
     @RequestMapping(value="/viewPortfolio", method = RequestMethod.GET)
     public ViewPortfolioDTO viewPortfolio(@ModelAttribute("username") String username,
                                           @RequestBody Portfolio portfolio) {
-        
+
         String cash = String.valueOf(portfolio.getCashInCents());
         if (cash.length() > 2) {
         cash = cash.substring(0, cash.length()-2) + "." + cash.substring(cash.length()-2);
@@ -66,7 +66,7 @@ public class CustomerController {
         } else if (cash.length() == 1) {
             cash = "0.0" + cash;
         }
-        
+
         List<Position> positionList = portfolio.getPositions();
         List<Funds> funds = new ArrayList<Funds>();
         for (Position position : positionList) {
@@ -80,17 +80,17 @@ public class CustomerController {
         viewPortfolioDTO.setCash(cash);
         viewPortfolioDTO.setFunds(funds);
         viewPortfolioDTO.setMessage("The action was successful");
-            
-        return viewPortfolioDTO;  
+
+        return viewPortfolioDTO;
     }
-    
-    @RequestMapping(value="/buyFund", method=RequestMethod.POST) 
-    public MessageDTO buyFund(@ModelAttribute("username") String username, @RequestBody BuyFundDTO buyFundDTO) 
+
+    @RequestMapping(value="/buyFund", method=RequestMethod.POST)
+    public MessageDTO buyFund(@ModelAttribute("username") String username, @RequestBody BuyFundDTO buyFundDTO)
                             throws BusinessLogicException {
         BigDecimal bigDecimal = new BigDecimal(buyFundDTO.getCashValue());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashValueInCents = newCash.intValueExact();
-    
+
         int result = customerService.buyFund(username, buyFundDTO.getSymbol(), cashValueInCents);
         if (result > 0) {
             return new MessageDTO("The fund has been successfully purchased");
@@ -99,9 +99,9 @@ public class CustomerController {
         } else {
             return new MessageDTO("You don’t have enough cash in your account to make this purchase");
         }
-        
+
     }
-    
+
     @RequestMapping(value="/sellFund", method=RequestMethod.POST)
     public MessageDTO sellFund(@ModelAttribute("username") String username, @RequestBody SellFundDTO sellFundDTO)
                                throws BusinessLogicException {
@@ -114,15 +114,15 @@ public class CustomerController {
             return new MessageDTO("You don’t have that many shares in your portfolio");
         }
     }
-    
+
     @RequestMapping(value="/requestCheck", method=RequestMethod.POST)
-    public MessageDTO requestCheck(@ModelAttribute("username") String username, 
+    public MessageDTO requestCheck(@ModelAttribute("username") String username,
                                    @RequestBody RequestCheckDTO requestCheckDTO) throws BusinessLogicException {
         BigDecimal bigDecimal = new BigDecimal(requestCheckDTO.getCashValue());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = newCash.intValueExact();
         boolean result = true;
-    
+
         result = customerService.requestCheck(username, cashInCents);
         if (result == true) {
             return new MessageDTO("The check has been successfully requeste");

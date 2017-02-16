@@ -19,30 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 import fund.mymutual.cfsws.business.SessionService;
 
 @RestController
-public class SessionController {
-    public static final String AUTH_COOKIE = "CFSAuthToken";
-
+public class LogoutController {
     @Autowired
     private SessionService sessionService;
 
-    @RequestMapping(value="/", method=RequestMethod.GET)
-    public MessageDTO welcome() {
-        return new MessageDTO("Welcome to the CFS web service!");
-    }
-
-    @RequestMapping(value="/greeting", method=RequestMethod.GET)
-    public MessageDTO greeting() {
-        return new MessageDTO("Hello from CFS!");
-    }
-
     @RequestMapping(value="/logout", method=RequestMethod.POST)
-    public MessageDTO logout(@CookieValue(value=AUTH_COOKIE, required=false) String authToken, HttpServletResponse response) {
+    public MessageDTO logout(@CookieValue(value=LoginController.AUTH_COOKIE, required=false) String authToken, HttpServletResponse response) {
         if (authToken == null) {
             return new MessageDTO("You are not currently logged in");
         }
         boolean authTokenValid = sessionService.terminateSession(authToken);
 
-        Cookie cookie = new Cookie(AUTH_COOKIE, null);
+        Cookie cookie = new Cookie(LoginController.AUTH_COOKIE, null);
         cookie.setMaxAge(0); // Remove cookie.
         response.addCookie(cookie);
 
