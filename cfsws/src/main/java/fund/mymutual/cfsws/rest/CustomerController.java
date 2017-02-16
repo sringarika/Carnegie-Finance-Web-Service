@@ -69,6 +69,11 @@ public class CustomerController {
         }
 
         List<Position> positionList = portfolio.getPositions();
+        if (positionList.size() == 0) {
+            ViewPortfolioDTO viewPortfolioDTO = new ViewPortfolioDTO("You don’t have any funds in your Portfolio");
+            viewPortfolioDTO.setMessage("You don’t have any funds in your Portfolio");
+            return viewPortfolioDTO;
+        }
         List<Funds> funds = new ArrayList<Funds>();
         for (Position position : positionList) {
             Funds fund = new Funds();
@@ -91,6 +96,9 @@ public class CustomerController {
         BigDecimal bigDecimal = new BigDecimal(buyFundDTO.getCashValue());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashValueInCents = newCash.intValueExact();
+        if (cashValueInCents <= 0) {
+            return new MessageDTO("The input you provided is not valid");
+        }
 
         int result = customerService.buyFund(username, buyFundDTO.getSymbol(), cashValueInCents);
         if (result > 0) {

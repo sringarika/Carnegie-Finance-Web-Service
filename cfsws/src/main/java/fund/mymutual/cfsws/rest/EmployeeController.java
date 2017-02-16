@@ -82,6 +82,9 @@ public class EmployeeController {
         BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = newCash.intValueExact();
+        if (cashInCents < 0) {
+            return new MessageDTO("The input you provided is not valid");
+        }
 
         customer.setFirstName(customerDTO.getFname());
         customer.setLastName(customerDTO.getLname());
@@ -106,7 +109,9 @@ public class EmployeeController {
         BigDecimal bigDecimal = new BigDecimal(createFundDTO.getInitial_value());
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int initialValueInCents = newCash.intValueExact();
-
+        if (initialValueInCents <= 0) {
+            return new MessageDTO("The input you provided is not valid");
+        }
         employeeService.createFund(createFundDTO.getName(), createFundDTO.getSymbol(), initialValueInCents);
         return new MessageDTO("The fund was successfully created");
     }
