@@ -21,7 +21,7 @@
     {
       "name": "web service task self-generated test plan",
       "flow": [
-        # Login test: fail case with random picked data
+        // Login test: fail case with random picked data
         {"post": {
           "url": "/login",
           "json": {"username":"{{{username}}}","password":"{{password}}"},
@@ -31,7 +31,7 @@
           }
          }
        },
-       # Login test: fail case with one field missing
+       // Login test: fail case with one field missing
        {"post": {
           "url": "/login",
           "json": {"username":"","password":"{{password}}"},
@@ -41,7 +41,7 @@
           }
          }
        },
-       # Login test: fail case with one field missing
+       // Login test: fail case with one field missing
        {"post": {
           "url": "/login",
           "json": {"username":"{{{username}}}","password":""},
@@ -51,7 +51,7 @@
           }
          }
        },
-       # Login test: fail case with both fields missing
+       // Login test: fail case with both fields missing
       {"post": {
           "url": "/login",
           "json": {"username":"","password":""},
@@ -61,7 +61,7 @@
           }
          }
        },
-       # Login test: success case with admin login
+       // Login test: success case with admin login
        {"post": {
           "url": "/login",
           "json": {"username":"jadmin","password":"admin"},
@@ -71,7 +71,7 @@
           }
          }
        },
-       # Create customer success case
+       // Create customer success case
        {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
@@ -81,7 +81,7 @@
            }
           }
         },
-        # Create customer success case
+        // Create customer success case
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"100.00","username":"zhisuocao","password":"123456"},
@@ -91,7 +91,7 @@
            }
           }
         },
-        # Create customer success case
+        // Create customer success case
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Junyi", "lname":"Song", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"gloria@cmu.edu","cash":"1000.00","username":"junyi","password":"666666"},
@@ -101,7 +101,7 @@
            }
           }
         },
-        # Create customer success case
+        // Create customer success case
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Varun", "lname":"Pant", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"varunp@cmu.edu","cash":"111.00","username":"varun","password":"888888"},
@@ -111,7 +111,7 @@
            }
           }
         },
-        # Create customer success case
+        // Create customer success case
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Yuchen", "lname":"Shi", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"yuchens@cmu.edu","cash":"111.11","username":"yuchen","password":"111111"},
@@ -121,7 +121,7 @@
            }
           }
         },
-        # Create customer success case
+        // Create customer success case
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
@@ -131,7 +131,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
@@ -141,7 +141,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
@@ -151,7 +151,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
@@ -161,7 +161,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
@@ -171,7 +171,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
@@ -181,7 +181,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
@@ -191,7 +191,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"","cash":"222.22","username":"sring","password":"222222"},
@@ -201,7 +201,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"","password":"222222"},
@@ -211,7 +211,7 @@
            }
           }
         },
-        # Create customer fail case with one field missing
+        // Create customer fail case with one field missing
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":""},
@@ -221,7 +221,7 @@
            }
           }
         },
-        # Create customer fail case - user already exists
+        // Create customer fail case - user already exists
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"100.00","username":"zhisuocao","password":"123456"},
@@ -231,7 +231,7 @@
            }
           }
         },
-        # Logout success
+        // Logout success
         {"post": {
             "url": "/logout",
             "match":{
@@ -240,7 +240,7 @@
             }
            }
          },
-        # Logout fail
+        // Logout fail
         {"post": {
             "url": "/logout",
             "match":{
@@ -249,7 +249,7 @@
             }
            }
          },
-        # Not logged in when creating customer
+        // Not logged in when creating customer
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"100.00","username":"zhisuocao","password":"123456"},
@@ -259,7 +259,7 @@
            }
           }
         },
-        # Not logged in when depositing check
+        // Not logged in when depositing check
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"someonedoesntexist", "value":"11.01"},
@@ -269,7 +269,7 @@
            }
          }
        },
-        # Not logged in when creating fund
+        // Not logged in when creating fund
        {"post": {
         "url": "/createFund",
         "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
@@ -279,7 +279,7 @@
            }
          }
        },
-       # Not logged in when doing transaition day
+       // Not logged in when doing transaition day
        {"post": {
         "url": "/transitionDay",
         "match":{
@@ -288,7 +288,7 @@
            }
          }
        },
-        # Login as a customer
+        // Login as a customer
         {"post": {
           "url": "/login",
           "json": {"username":"zhisuocao","password":"123456"},
@@ -298,7 +298,7 @@
           }
          }
        },
-       # Not an employee when creating customer
+       // Not an employee when creating customer
         {"post": {
            "url": "/createCustomerAccount",
            "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"100.00","username":"zhisuocao","password":"123456"},
@@ -308,7 +308,7 @@
            }
           }
         },
-        # Not an employee when creating fund
+        // Not an employee when creating fund
        {"post": {
         "url": "/createFund",
         "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
@@ -318,7 +318,7 @@
            }
          }
        },
-       # Not an employee when depositing check
+       // Not an employee when depositing check
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"someonedoesntexist", "value":"11.01"},
@@ -328,7 +328,7 @@
            }
          }
        },
-       # Not an employee when doing transaition day
+       // Not an employee when doing transaition day
        {"post": {
         "url": "/transitionDay",
         "match":{
@@ -337,7 +337,7 @@
            }
          }
        },
-        # Logout success
+        // Logout success
         {"post": {
             "url": "/logout",
             "match":{
@@ -346,7 +346,7 @@
             }
            }
          },
-        # Login as an employee
+        // Login as an employee
         {"post": {
           "url": "/login",
           "json": {"username":"jadmin","password":"admin"},
@@ -356,7 +356,7 @@
           }
          }
        },
-       # Create fund success case
+       // Create fund success case
        {"post": {
         "url": "/createFund",
         "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
@@ -366,7 +366,7 @@
            }
          }
        },
-       # Create fund success case
+       // Create fund success case
        {"post": {
         "url": "/createFund",
         "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
@@ -376,7 +376,7 @@
            }
          }
        },
-      # Create fund fail case - duplicate fund information
+      // Create fund fail case - duplicate fund information
        {"post": {
         "url": "/createFund",
         "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
@@ -386,7 +386,7 @@
            }
          }
        },
-       # Deposit check success
+       // Deposit check success
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"zhisuocao", "value":"11.01"},
@@ -396,7 +396,7 @@
            }
          }
        },
-       # Deposit check failure case
+       // Deposit check failure case
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"someonedoesntexist", "value":"11.01"},
@@ -406,7 +406,7 @@
            }
          }
        },
-       # Deposit check failure case
+       // Deposit check failure case
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"zhisuocao", "value":"11"},
@@ -416,7 +416,7 @@
            }
          }
        },
-       # Deposit check failure case
+       // Deposit check failure case
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"", "value":"11.01"},
@@ -426,7 +426,7 @@
            }
          }
        },
-       # Deposit check failure case
+       // Deposit check failure case
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"zhisuocao", "value":""},
@@ -436,7 +436,7 @@
            }
          }
        },
-       # Deposit check failure case
+       // Deposit check failure case
        {"post": {
         "url": "/depositCheck",
         "json": {"username,":"", "value":""},
@@ -446,7 +446,7 @@
            }
          }
        },
-       # Transaition day success case
+       // Transaition day success case
        {"post": {
         "url": "/transitionDay",
         "match":{
