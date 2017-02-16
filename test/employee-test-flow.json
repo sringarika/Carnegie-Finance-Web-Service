@@ -1,6 +1,6 @@
 {
   "config": {
-    "target": "http://api.mymutual.fund",
+    "target": "http://localhost:8080",
     "phases": [
       {"duration": 1, "arrivalCount": 1}
     ],
@@ -68,7 +68,7 @@
        },
        {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0.00","username":"{{{username}}}","password":"{{password}}"},
            "match":{
              "json":"$.message",
              "value":"{{{fname}}} was registered successfully"
@@ -122,7 +122,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
+           "json": {"fname":"", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring1","password":"222222"},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -131,7 +131,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
+           "json": {"fname":"Sringarika", "lname":"", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring2","password":"222222"},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -140,7 +140,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
+           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring3","password":"222222"},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -149,7 +149,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
+           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring4","password":"222222"},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -158,7 +158,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
+           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring5","password":"222222"},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -167,7 +167,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
+           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"", "email":"sring@cmu.edu","cash":"222.22","username":"sring6","password":"222222"},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -176,7 +176,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"","cash":"222.22","username":"sring","password":"222222"},
+           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"","cash":"222.22","username":"sring7","password":"222222"},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -194,7 +194,7 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":""},
+           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring8","password":""},
            "match":{
              "json":"$.message",
              "value":"The input you provided is not valid"
@@ -272,7 +272,7 @@
        },
         {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"100.00","username":"zhisuocao","password":"123456"},
+           "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"100.00","username":"zhisuocao1","password":"123456"},
            "match":{
              "json":"$.message",
              "value":"You must be an employee to perform this action"
@@ -342,7 +342,43 @@
        },
        {"post": {
         "url": "/createFund",
-        "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
+        "json": {"name":"Carnegie Mellon", "symbol":"CMU2", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"Carnegie Mellon2", "symbol":"CMU", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"", "symbol":"CMUlala", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"Carnegie Mellonlalla", "symbol":"", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"Carnegie Mellon1111", "symbol":"CMU1111", "initial_value":""},
         "match":{
           "json":"$.message",
           "value":"The input you provided is not valid"
