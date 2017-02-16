@@ -181,7 +181,7 @@
           "value":"The check was successfully deposited"
            }
          }
-        } 
+       }, 
        {"post": {
           "url": "/buyFund",
           "json": {"symbol":"TB","cashValue":"1000.01"},
