@@ -55,11 +55,8 @@ public class CustomerController {
         return new MessageDTO("Hello, " + username + "!");
     }
 
-    @RequestMapping(value="/viewPortfolio", method = RequestMethod.GET)
-    public ViewPortfolioDTO viewPortfolio(@ModelAttribute("username") String username,
-                                          @Valid @RequestBody Portfolio portfolio) {
-
-        String cash = String.valueOf(portfolio.getCashInCents());
+    private String cashFromCents(int cashInCents) {
+        String cash = String.valueOf(cashInCents);
         if (cash.length() > 2) {
         cash = cash.substring(0, cash.length()-2) + "." + cash.substring(cash.length()-2);
         } else if (cash.length() == 2) {
@@ -67,6 +64,12 @@ public class CustomerController {
         } else if (cash.length() == 1) {
             cash = "0.0" + cash;
         }
+        return cash;
+    }
+
+    @RequestMapping(value="/viewPortfolio", method = RequestMethod.GET)
+    public ViewPortfolioDTO viewPortfolio(@ModelAttribute("username") String username) throws BusinessLogicException {
+        Portfolio portfolio = customerService.getPortfolio(username);
 
         List<Position> positionList = portfolio.getPositions();
         if (positionList.size() == 0) {
@@ -74,16 +77,16 @@ public class CustomerController {
             viewPortfolioDTO.setMessage("You don’t have any funds in your Portfolio");
             return viewPortfolioDTO;
         }
-        List<Funds> funds = new ArrayList<Funds>();
+        List<PositionDTO> funds = new ArrayList<PositionDTO>();
         for (Position position : positionList) {
-            Funds fund = new Funds();
+            PositionDTO fund = new PositionDTO();
             fund.setName(position.getName());
-            fund.setPrice(position.getPriceInCents());
-            fund.setShares(position.getShares());
+            fund.setPrice(cashFromCents(position.getPriceInCents()));
+            fund.setShares(Integer.toString(position.getShares()));
             funds.add(fund);
         }
         ViewPortfolioDTO viewPortfolioDTO = new ViewPortfolioDTO("The action was successful");
-        viewPortfolioDTO.setCash(cash);
+        viewPortfolioDTO.setCash(cashFromCents(portfolio.getCashInCents()));
         viewPortfolioDTO.setFunds(funds);
         viewPortfolioDTO.setMessage("The action was successful");
 
