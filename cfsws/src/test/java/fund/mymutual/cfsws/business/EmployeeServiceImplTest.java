@@ -101,6 +101,13 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    public void testDepositCheckZero() throws BusinessLogicException {
+        employeeService.depositCheck("example", 0);
+        User result = JpaUtil.transaction(em -> (em.find(User.class, "example")));
+        Assert.assertEquals(123, result.getCash());
+    }
+
+    @Test
     public void testDepositCheckNoSuchUser() {
         try {
             employeeService.depositCheck("no-such-user", 123);

@@ -119,6 +119,10 @@ public class CustomerServiceImpl implements CustomerService {
             if (fund == null) {
                 throw new BusinessLogicException("There is no such fund!");
             }
+            if (shares == 0) {
+                return true;
+            }
+
             CustomerPosition position = getCustomerPosition(em, username, fund.getFundsymbol(), LockModeType.PESSIMISTIC_WRITE);
             if (position == null) {
                 return false;
