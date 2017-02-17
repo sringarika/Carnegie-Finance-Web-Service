@@ -138,7 +138,40 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testTransitionDay() {
-        employeeService.transitionDay();
+        int price = 123;
+        for (int i = 0; i < 100; i++) {
+            employeeService.transitionDay();
+            Fund fund = JpaUtil.transaction(em -> {
+                return em.find(Fund.class, "example");
+            });
+            int newPrice = fund.getFundprice();
+            int minPrice = price - (price / 10);
+            int maxPrice = price + (price / 10);
+            Assert.assertTrue("price should not decrease more than 10%", newPrice >= minPrice);
+            Assert.assertTrue("price should not increase more than 10%", newPrice <= maxPrice);
+            Assert.assertTrue("price should not reach zero", newPrice > 0);
+            price = newPrice;
+        }
+
+        // Let's try again starting with 1.
+        price = 1;
+        JpaUtil.transaction(em -> {
+            em.find(Fund.class, "example").setFundprice(1);
+        });
+
+        for (int i = 0; i < 100; i++) {
+            employeeService.transitionDay();
+            Fund fund = JpaUtil.transaction(em -> {
+                return em.find(Fund.class, "example");
+            });
+            int newPrice = fund.getFundprice();
+            int minPrice = price - (price / 10);
+            int maxPrice = price + (price / 10);
+            Assert.assertTrue("price should not decrease more than 10%", newPrice >= minPrice);
+            Assert.assertTrue("price should not increase more than 10%", newPrice <= maxPrice);
+            Assert.assertTrue("price should not reach zero", newPrice > 0);
+            price = newPrice;
+        }
     }
 
 }
