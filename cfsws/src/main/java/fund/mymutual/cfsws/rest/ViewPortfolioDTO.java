@@ -2,32 +2,22 @@ package fund.mymutual.cfsws.rest;
 
 import java.util.List;
 
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import fund.mymutual.cfsws.business.Position;
-
 public class ViewPortfolioDTO extends MessageDTO {
-    @NotEmpty
     private String message;
-    
-    @NotEmpty
+
     private String cash;
-    
-    @NotNull
-    private List<Funds> funds;
-    
+
+    private List<PositionDTO> funds;
+
     public ViewPortfolioDTO(String message) {
         super(message);
     }
-    
+
     @Override
     public String getMessage() {
         return message;
     }
-    
+
     public void setMessage(String message) {
         this.message = message;
     }
@@ -40,11 +30,11 @@ public class ViewPortfolioDTO extends MessageDTO {
         this.cash = cash;
     }
 
-    public List<Funds> getFunds() {
+    public List<PositionDTO> getFunds() {
         return funds;
     }
 
-    public void setFunds(List<Funds> funds) {
+    public void setFunds(List<PositionDTO> funds) {
         this.funds = funds;
     }
 }

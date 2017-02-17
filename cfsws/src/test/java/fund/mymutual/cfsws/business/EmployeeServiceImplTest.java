@@ -101,6 +101,13 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    public void testDepositCheckZero() throws BusinessLogicException {
+        employeeService.depositCheck("example", 0);
+        User result = JpaUtil.transaction(em -> (em.find(User.class, "example")));
+        Assert.assertEquals(123, result.getCash());
+    }
+
+    @Test
     public void testDepositCheckNoSuchUser() {
         try {
             employeeService.depositCheck("no-such-user", 123);
@@ -138,7 +145,40 @@ public class EmployeeServiceImplTest {
 
     @Test
     public void testTransitionDay() {
-        employeeService.transitionDay();
+        int price = 123;
+        for (int i = 0; i < 100; i++) {
+            employeeService.transitionDay();
+            Fund fund = JpaUtil.transaction(em -> {
+                return em.find(Fund.class, "example");
+            });
+            int newPrice = fund.getFundprice();
+            int minPrice = price - (price / 10);
+            int maxPrice = price + (price / 10);
+            Assert.assertTrue("price should not decrease more than 10%", newPrice >= minPrice);
+            Assert.assertTrue("price should not increase more than 10%", newPrice <= maxPrice);
+            Assert.assertTrue("price should not reach zero", newPrice > 0);
+            price = newPrice;
+        }
+
+        // Let's try again starting with 1.
+        price = 1;
+        JpaUtil.transaction(em -> {
+            em.find(Fund.class, "example").setFundprice(1);
+        });
+
+        for (int i = 0; i < 100; i++) {
+            employeeService.transitionDay();
+            Fund fund = JpaUtil.transaction(em -> {
+                return em.find(Fund.class, "example");
+            });
+            int newPrice = fund.getFundprice();
+            int minPrice = price - (price / 10);
+            int maxPrice = price + (price / 10);
+            Assert.assertTrue("price should not decrease more than 10%", newPrice >= minPrice);
+            Assert.assertTrue("price should not increase more than 10%", newPrice <= maxPrice);
+            Assert.assertTrue("price should not reach zero", newPrice > 0);
+            price = newPrice;
+        }
     }
 
 }
