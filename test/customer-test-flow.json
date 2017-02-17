@@ -1,6 +1,7 @@
 {
   "config": {
     "target": "http://localhost:8080",
+    "processor": "./processor.js",
     "phases": [
       {"duration": 1, "arrivalCount": 1}
     ],
@@ -433,13 +434,45 @@
           }
          }
        },
-       {"post": {
+       {"get": {
           "url": "/viewPortfolio",
-          "match":{
-            "json": {"message":"The action was successful", "cash":"201.75", "funds":[{"name":"CMU", "shares": "16","price":"11.01"},{"name":"TTB", "shares": "2001","price":"0.01"},{"name":"OWMU", "shares": "9","price":"18.88"}]}
-          }
+          "afterResponse": "parsePortfolio",
+          "match":[
+            {
+              "json":"$.message",
+              "value":"The action was successful"
+            },
+            {
+              "json":"$.cash",
+              "value":"233.90"
+            },
+            {
+              "json":"$.$shares['Carnegie Mellon']",
+              "value":"16"
+            },
+            {
+              "json":"$.$price['Carnegie Mellon']",
+              "value":"11.01"
+            },
+            {
+              "json":"$.$shares['Obama We Miss You']",
+              "value":"9"
+            },
+            {
+              "json":"$.$price['Obama We Miss You']",
+              "value":"18.88"
+            },
+            {
+              "json":"$.$shares['Trump The Best']",
+              "value":"2001"
+            },
+            {
+              "json":"$.$price['Trump The Best']",
+              "value":"0.01"
+            }
+          ]
          }
-       },
+       }
      ]
     }
   ]
