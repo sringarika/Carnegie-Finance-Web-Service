@@ -68,14 +68,12 @@ public class CustomerController {
     }
 
     @RequestMapping(value="/viewPortfolio", method = RequestMethod.GET)
-    public ViewPortfolioDTO viewPortfolio(@ModelAttribute("username") String username) throws BusinessLogicException {
+    public MessageDTO viewPortfolio(@ModelAttribute("username") String username) throws BusinessLogicException {
         Portfolio portfolio = customerService.getPortfolio(username);
 
         List<Position> positionList = portfolio.getPositions();
         if (positionList.size() == 0) {
-            ViewPortfolioDTO viewPortfolioDTO = new ViewPortfolioDTO("You don’t have any funds in your Portfolio");
-            viewPortfolioDTO.setMessage("You don’t have any funds in your Portfolio");
-            return viewPortfolioDTO;
+            return new MessageDTO("You don’t have any funds in your Portfolio");
         }
         List<PositionDTO> funds = new ArrayList<PositionDTO>();
         for (Position position : positionList) {
