@@ -432,7 +432,14 @@
             "value":"The input you provided is not valid"
           }
          }
-       }
+       },
+       {"post": {
+          "url": "/viewPortfolio",
+          "match":{
+            "json": {"message":"The action was successful", "cash":"201.75", "funds":[{"name":"CMU", "shares": "16","price":"11.01"},{"name":"TTB", "shares": "2001","price":"0.01"},{"name":"OWMU", "shares": "9","price":"18.88"}]}
+          }
+         }
+       },
      ]
     }
   ]
