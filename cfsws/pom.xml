@@ -4,7 +4,7 @@
 
   <groupId>fund.mymutual</groupId>
   <artifactId>cfsws</artifactId>
-  <version>0.3.0</version>
+  <version>0.4.1</version>
 
   <parent>
     <groupId>org.springframework.boot</groupId>

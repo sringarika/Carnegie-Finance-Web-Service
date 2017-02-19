@@ -4,7 +4,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.Instant;
 
-import javax.persistence.LockModeType;
+import javax.persistence.EntityExistsException;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import fund.mymutual.cfsws.model.JpaUtil;
@@ -47,20 +48,27 @@ public class SessionServiceImpl implements SessionService {
 
     @Override
     public String beginSession(String username) {
-        return JpaUtil.transaction(em -> {
-            String sessionId = null;
-            do {
-                sessionId = generateToken();
-            } while (em.find(Session.class, sessionId, LockModeType.PESSIMISTIC_WRITE) != null);
-
+        String sessionId = null;
+        while (sessionId == null) {
+            sessionId = generateToken();
             Session session = new Session();
             session.setUsername(username);
             session.setSessionid(sessionId);
             long expire = Instant.now().plusSeconds(sessionLifeSeconds).getEpochSecond();
             session.setExpdate(Long.toString(expire));
-            em.persist(session);
-            return sessionId;
-        });
+            try {
+                JpaUtil.transaction(em -> {
+                    em.persist(session);
+                });
+            } catch (PersistenceException e) {
+                if (!(e instanceof EntityExistsException)) {
+                    System.out.println("Exception when creating session: " + e.getClass().getName());
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+
+        return sessionId;
     }
 
     @Override
@@ -89,15 +97,19 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public boolean terminateSession(String token) {
         return JpaUtil.transaction(em -> {
-            Session session = em.find(Session.class, token, LockModeType.PESSIMISTIC_WRITE);
+            Session session = em.find(Session.class, token);
             if (session == null) return false;
             long expire = Long.parseLong(session.getExpdate());
+            boolean sessionValid = true;
             if (Instant.now().getEpochSecond() >= expire) {
-                em.remove(session);
-                return false;
+                sessionValid = false;
             }
-            em.remove(session);
-            return true;
+
+            // Use DELETE query to avoid errors when the session ID is gone.
+            Query query = em.createQuery("DELETE Session WHERE sessionid = :sessionid");
+            query.setParameter("sessionid", token);
+            int deletedCount = query.executeUpdate();
+            return sessionValid && deletedCount > 0;
         });
     }
 
