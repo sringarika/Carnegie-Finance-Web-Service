@@ -22,7 +22,7 @@ public class JpaUtil {
                     String hostname = System.getenv("RDS_HOSTNAME");
                     String port = System.getenv("RDS_PORT");
                     String jdbcUrl = "jdbc:mysql://" + hostname + ":" + port + "/" + dbName +
-                            "?useUnicode=true&characterEncoding=utf8" +
+                            "?useUnicode=true&characterEncoding=UTF-8" +
                             "&user=" + userName + "&password=" + password;
                     config.put("javax.persistence.jdbc.url", jdbcUrl);
                     config.put("hibernate.hbm2ddl.auto", "validate");
