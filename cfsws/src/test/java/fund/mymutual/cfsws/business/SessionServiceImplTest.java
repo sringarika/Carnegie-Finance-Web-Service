@@ -112,14 +112,14 @@ public class SessionServiceImplTest {
     }
 
     @Test
-    public void testOneUserCanOnlyHaveOneSession() {
+    public void testOneUserCanHaveMultipleSessions() {
         String token1 = sessionService.beginSession("example");
-        // This will invalidate token1 since one customer can only have one session.
+        // This will not invalidate token1.
         String token2 = sessionService.beginSession("example");
         boolean success1 = sessionService.terminateSession(token1);
         boolean success2 = sessionService.terminateSession(token2);
 
-        Assert.assertFalse(success1);
+        Assert.assertTrue(success1);
         Assert.assertTrue(success2);
     }
 

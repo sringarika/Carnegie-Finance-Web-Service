@@ -48,9 +48,6 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public String beginSession(String username) {
         return JpaUtil.transaction(em -> {
-            Query query = em.createQuery("DELETE FROM Session WHERE username = :username");
-            query.setParameter("username", username);
-            query.executeUpdate();
             String sessionId = null;
             do {
                 sessionId = generateToken();
