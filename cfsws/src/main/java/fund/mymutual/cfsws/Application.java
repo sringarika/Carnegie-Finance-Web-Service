@@ -10,7 +10,11 @@ import fund.mymutual.cfsws.model.User;
 @SpringBootApplication
 public class Application {
     public static void main(String[] args) {
-        seedDB();
+        if (System.getenv("NO_SEED_DB") == null) {
+            seedDB();
+        } else {
+            verifyDB();
+        }
         SpringApplication.run(Application.class, args);
     }
 
@@ -32,6 +36,16 @@ public class Application {
             jadmin.setZip("15143");
             jadmin.setRole(CFSRole.Employee);
             em.persist(jadmin);
+        });
+    }
+
+    private static void verifyDB() {
+        // Add initial user. This is the only required initial user in specification.
+        JpaUtil.transaction(em -> {
+            User jadmin = em.find(User.class, "jadmin");
+            if (jadmin == null) {
+                System.err.println("WARNING: Initial user is missing!");
+            }
         });
     }
 }
