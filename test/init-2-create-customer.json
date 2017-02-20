@@ -20,7 +20,7 @@
         {"post": {
           "url": "/createCustomerAccount",
           "beforeRequest": "reuseSession",
-          "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
+          "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"2000","username":"{{{username}}}","password":"{{password}}"},
           "match":{
             "json":"$.message",
             "value":"{{{fname}}} was registered successfully"
