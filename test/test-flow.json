@@ -1,0 +1,269 @@
+{
+  "config": {
+    "target": "http://api.mymutual.fund",
+    "phases": [
+      {"duration": 2, "arrivalCount": 100}
+    ],
+    "payload": [
+    {
+      "path": "UserData.csv",
+      "fields": ["fname","lname","address","city","state","zip","email","username", "password"],
+      "order": "sequence"
+    },
+    {
+      "path": "Portfolio.csv",
+      "fields": ["name","symbol","initial_value"],
+      "order": "sequence"
+    }
+  ]
+  },
+  "scenarios": [
+    {
+      "name": "Team Binary's test",
+      "flow": [
+        {"post": {
+          "url": "/login",
+          "json": {"username":"{{{username}}}","password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"There seems to be an issue with the username/password combination that you entered"
+          }
+         }
+       },
+       {"post": {
+         "url": "/login",
+         "json": {"username":"jadmin","password":"admin"},
+         "match":{
+           "json":"$.message",
+           "value":"Welcome Jane"
+            }
+          }
+        },
+        {"post": {
+            "url": "/logout",
+            "match":{
+              "json":"$.message",
+              "value":"You have been successfully logged out"
+            }
+           }
+         },
+         {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
+           "match":{
+             "json":"$.message",
+             "value":"You are not currently logged in"
+           }
+          }
+        },
+        {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"You are not currently logged in"
+        }
+       }
+     },
+      {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+        "match":{
+          "json":"$.message",
+          "value":"You are not currently logged in"
+           }
+         }
+       },
+        {"post": {
+          "url": "/login",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+             }
+           }
+         },
+        {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"-100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"","cash":"100","username":"","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"-100","username":"{{{username}}}","password":""},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+       {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"1000","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"{{{fname}}} was registered successfully"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"", "cash":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"The check was successfully deposited"
+        }
+       }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"", "initial_value":"{{{initial_value}}}"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"", "symbol":"", "initial_value":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+       "url": "/createFund",
+       "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+       "match":{
+         "json":"$.message",
+         "value":"The fund was successfully created"
+          }
+        }
+      }
+     ]
+    }
+  ]
+}
