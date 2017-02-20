@@ -15,14 +15,15 @@ import org.mindrot.jbcrypt.BCrypt;
 public class User {
     @Id
     private String username;
-    private String firstName;
-    private String lastName;
+
+    private byte[] firstName;
+    private byte[] lastName;
     private String passwordHash;
-    private String address;
-    private String city;
-    private String state;
-    private String zip;
-    private String email;
+    private byte[] address;
+    private byte[] city;
+    private byte[] state;
+    private byte[] zip;
+    private byte[] email;
     private int cashincents;
 
     @Enumerated(EnumType.STRING)
@@ -59,11 +60,11 @@ public class User {
      */
 
     public String getFirstName() {
-        return firstName;
+        return new String(firstName);
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+        this.firstName = firstName.getBytes();
     }
 
     /**
@@ -74,11 +75,11 @@ public class User {
      * @return     The last name.
      */
     public String getLastName() {
-        return lastName;
+        return new String(lastName);
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastName = lastName.getBytes();
     }
 
     /**
@@ -130,54 +131,54 @@ public class User {
      * Gets the address.
      */
     public String getAddress() {
-        return address;
+        return new String(address);
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.address = address.getBytes();
     }
     /**
      * Gets the city.
      */
     public String getCity() {
-        return city;
+        return new String(city);
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.city = city.getBytes();
     }
 
     /**
      * Gets the state.
      */
     public String getState() {
-        return state;
+        return new String(state);
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state = state.getBytes();
     }
 
     /**
      * Gets the zip.
      */
     public String getZip() {
-        return zip;
+        return new String(zip);
     }
 
     public void setZip(String zip) {
-        this.zip = zip;
+        this.zip = zip.getBytes();
     }
 
     /**
      * Gets the email.
      */
     public String getEmail() {
-        return email;
+        return new String(email);
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.getBytes();
     }
 
     /**
