@@ -1,0 +1,189 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 1, "arrivalCount": 1}
+    ],
+    "payload": [
+    {
+      "path": "UserData.csv",
+      "fields": ["fname","lname","address","city","state","zip","email","username","password"],
+      "order": "sequence"
+    },
+    {
+      "path": "Portfolio.csv",
+      "fields": ["name","symbol","initial_value"],
+      "order": "sequence"
+    }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "web service task self-generated test plan",
+      "flow": [
+        {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+         }
+       },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be a customer to perform this action"
+          }
+         }
+       },
+       {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"Junyi", "lname":"Song", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"gloria@cmu.edu","cash":"10000.00","username":"junyi","password":"666666"},
+           "match":{
+             "json":"$.message",
+             "value":"Junyi was registered successfully"
+           }
+          }
+        },
+        {"post": {
+        "url": "/createFund",
+        "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The fund was successfully created"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"Team Binary", "symbol":"TB", "initial_value":"111.88"},
+        "match":{
+          "json":"$.message",
+          "value":"The fund was successfully created"
+           }
+         }
+       },
+       {"post": {
+        "url": "/logout",
+        "match":{
+          "json":"$.message",
+          "value":"You have been successfully logged out"
+        }
+        }
+       },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"junyi","password":"666666"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Junyi"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"CMU","cashValue":"10000.11"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have enough cash in your account to make this purchase"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"SDE","cashValue":"100"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"","cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"CMU","cashValue":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"","cashValue":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"You didn’t provide enough cash to make this purchase"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"-1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"asf234@#"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"#@$%^&&","cashValue":"100"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"CMU","cashValue":"1000"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund has been successfully purchased"
+          }
+         }
+       }
+      ]
+    }
+  ]
+}

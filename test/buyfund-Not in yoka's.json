@@ -1,0 +1,27 @@
+{"post": {
+  "url": "/buyFund",
+  "json": {"symbol":"TB","cashValue":"asf234@#"},
+  "match":{
+    "json":"$.message",
+    "value":"The input you provided is not valid"
+  }
+ }
+},
+{"post": {
+  "url": "/buyFund",
+  "json": {"symbol":"#@$%^&&","cashValue":"100"},
+  "match":{
+    "json":"$.message",
+    "value":"The input you provided is not valid"
+  }
+ }
+},
+{"post": {
+  "url": "/buyFund",
+  "json": {"symbol":"TB","cashValue":"0"},
+  "match":{
+    "json":"$.message",
+    "value":"You didn’t provide enough cash to make this purchase"
+  }
+ }
+},
