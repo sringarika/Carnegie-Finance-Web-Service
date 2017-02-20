@@ -28,13 +28,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private CFSRole role;
 
-    @OneToMany(mappedBy ="username")   
+    @OneToMany(mappedBy ="username")
     private Set<CustomerPosition> customerposition;
-    
+
     public Set<CustomerPosition> getCustomerpositions() {
 		return customerposition;
     }
-    
+
     public User() {
 
     }

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 public class CustomerPosition implements Serializable{
 	private static final long serialVersionUID = 1L;
     private int shares; //should be a whole number
+
     @Id
     private String username;
 

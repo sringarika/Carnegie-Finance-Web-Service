@@ -82,6 +82,28 @@ public class CustomerServiceImplTest {
     }
 
     @Test
+    public void testGetPortfolioWithZeroShares() throws BusinessLogicException {
+        JpaUtil.transaction(em -> {
+            Fund fund1 = em.find(Fund.class, "fund1");
+            CustomerPosition position1 = new CustomerPosition();
+            position1.setUsername("example");
+            position1.setFund(fund1);
+            position1.setShares(0);
+            em.persist(position1);
+        });
+        Portfolio portfolio = customerService.getPortfolio("example");
+        Assert.assertNotNull(portfolio);
+        Assert.assertEquals(123, portfolio.getCashInCents());
+        List<Position> positions = portfolio.getPositions();
+        Assert.assertNotNull(positions);
+        Assert.assertEquals(1, positions.size());
+        Position position = positions.get(0);
+        Assert.assertEquals(123, position.getShares());
+        Assert.assertEquals("Fund 2", position.getName());
+        Assert.assertEquals(123, position.getPriceInCents());
+    }
+
+    @Test
     public void testBuyFund() throws BusinessLogicException {
         int shares = customerService.buyFund("example", "fund1", 123);
         Assert.assertEquals(1, shares);

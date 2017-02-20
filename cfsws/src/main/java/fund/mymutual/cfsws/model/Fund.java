@@ -7,13 +7,12 @@ import javax.persistence.Table;
 @Entity
 @Table(name="cfs_fund")
 public class Fund {
-    @Id
     private String fundsymbol;
     private String fundname;
     private int fundprice; //in cents
     private String funddate;
 
-    @Column(unique=true)
+    @Id
     private String upperSymbol;
 
     @Column(unique=true)
