@@ -3,7 +3,7 @@
     "target": "http://localhost:8080",
     "processor": "./processor.js",
     "phases": [
-      {"duration": 60, "arrivalCount": 1000}
+      {"duration": 2, "arrivalCount": 1000}
     ],
     "payload": [
       {
