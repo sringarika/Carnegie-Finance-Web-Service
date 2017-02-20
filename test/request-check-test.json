@@ -1,0 +1,136 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 1, "arrivalCount": 50}
+    ],
+    "payload": [
+    {
+      "path": "UserData.csv",
+      "fields": ["fname","lname","address","city","state","zip","email","username","password"],
+      "order": "sequence"
+    },
+    {
+      "path": "Portfolio.csv",
+      "fields": ["name","symbol","initial_value"],
+      "order": "sequence"
+    }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "web service task self-generated test plan",
+      "flow": [
+        {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+         }
+       },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be a customer to perform this action"
+          }
+         }
+       },
+       {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"Junyi", "lname":"Song", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"gloria@cmu.edu","cash":"10000.00","username":"junyi","password":"666666"},
+           "match":{
+             "json":"$.message",
+             "value":"Junyi was registered successfully"
+           }
+          }
+        },
+       {"post": {
+        "url": "/logout",
+        "match":{
+          "json":"$.message",
+          "value":"You have been successfully logged out"
+        }
+        }
+       },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"junyi","password":"666666"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Junyi"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"10000.11"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have sufficient funds in your account to cover the requested check"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"The check has been successfully requested"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"-1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"asf234@#"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+      
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"1000"},
+          "match":{
+            "json":"$.message",
+            "value":"The check has been successfully requested"
+          }
+         }
+       }
+      ]
+    }
+  ]
+}
