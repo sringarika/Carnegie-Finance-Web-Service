@@ -1,0 +1,103 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "phases": [
+      {"duration": 1, "arrivalCount": 20}
+    ],
+    "payload": [
+    {
+      "path": "Portfolio.csv",
+      "fields": ["name","symbol","initial_value"],
+      "order": "sequence"
+    }
+  ]
+  },
+  "scenarios": [
+    {
+      "name": "Team Binary's test",
+      "flow": [
+       {"post": {
+         "url": "/login",
+         "json": {"username":"jadmin","password":"admin"},
+         "match":{
+           "json":"$.message",
+           "value":"Welcome Jane"
+            }
+          }
+        },
+        {"post": {
+        "url": "/createFund",
+        "json": {"name":"", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"", "initial_value":"{{{initial_value}}}"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"", "symbol":"", "initial_value":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"-10.00"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"0"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"nonnumber"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+           }
+         }
+     },
+     {"post": {
+       "url": "/createFund",
+       "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+       "match":{
+         "json":"$.message",
+         "value":"The fund was successfully created"
+          }
+        }
+      }
+      ]
+    }
+  ]
+}
