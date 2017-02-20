@@ -1,0 +1,347 @@
+{
+  "aggregate": {
+    "timestamp": "2017-02-16T17:31:37.077Z",
+    "scenariosCreated": 2,
+    "scenariosCompleted": 0,
+    "requestsCompleted": 11,
+    "latency": {
+      "min": 8.1,
+      "max": 23704.1,
+      "median": 2975.6,
+      "p95": 23672,
+      "p99": null
+    },
+    "rps": {
+      "count": 11,
+      "mean": 0.31
+    },
+    "scenarioDuration": {
+      "min": null,
+      "max": null,
+      "median": null,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "web service task self-generated test plan": 2
+    },
+    "errors": {
+      "Failed match": 2
+    },
+    "codes": {
+      "200": 10,
+      "404": 1
+    },
+    "matches": 9,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 1,
+        "arrivalCount": 2
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-02-16T17:30:38.661Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-02-16T17:30:48.670Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-02-16T17:30:58.680Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-02-16T17:31:08.688Z",
+      "scenariosCreated": 2,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 2,
+        "mean": 0.28
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "web service task self-generated test plan": 2
+      },
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 2,
+      "pendingRequests": 13
+    },
+    {
+      "timestamp": "2017-02-16T17:31:18.696Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 8,
+      "latency": {
+        "min": 8.1,
+        "max": 7048.7,
+        "median": 1494.9,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 8,
+        "mean": 0.8
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {
+        "200": 8
+      },
+      "matches": 8,
+      "latencies": [
+        [
+          1487266268669,
+          "92347c21-9066-4201-b8ff-890cf16660e6",
+          7048711026,
+          200
+        ],
+        [
+          1487266268691,
+          "f34ab479-47c0-42ef-9fd7-fd760b343bc1",
+          6597840232,
+          200
+        ],
+        [
+          1487266271678,
+          "f34ab479-47c0-42ef-9fd7-fd760b343bc1",
+          2975638677,
+          200
+        ],
+        [
+          1487266271682,
+          "92347c21-9066-4201-b8ff-890cf16660e6",
+          2996469050,
+          200
+        ],
+        [
+          1487266271694,
+          "f34ab479-47c0-42ef-9fd7-fd760b343bc1",
+          13002476,
+          200
+        ],
+        [
+          1487266271699,
+          "92347c21-9066-4201-b8ff-890cf16660e6",
+          14118451,
+          200
+        ],
+        [
+          1487266271706,
+          "f34ab479-47c0-42ef-9fd7-fd760b343bc1",
+          8081910,
+          200
+        ],
+        [
+          1487266271712,
+          "92347c21-9066-4201-b8ff-890cf16660e6",
+          8315182,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 2,
+      "pendingRequests": 20
+    },
+    {
+      "timestamp": "2017-02-16T17:31:28.703Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 2,
+      "pendingRequests": 20
+    },
+    {
+      "timestamp": "2017-02-16T17:31:37.068Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 3,
+      "latency": {
+        "min": 1185.9,
+        "max": 23704.1,
+        "median": 23062.4,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 1,
+        "mean": 0.61
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {
+        "Failed match": 2
+      },
+      "codes": {
+        "200": 2,
+        "404": 1
+      },
+      "matches": 1,
+      "latencies": [
+        [
+          1487266294776,
+          "92347c21-9066-4201-b8ff-890cf16660e6",
+          23062417519,
+          200
+        ],
+        [
+          1487266295412,
+          "f34ab479-47c0-42ef-9fd7-fd760b343bc1",
+          23704094729,
+          200
+        ],
+        [
+          1487266296607,
+          "f34ab479-47c0-42ef-9fd7-fd760b343bc1",
+          1185883110,
+          404
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 2,
+      "pendingRequests": 14
+    }
+  ]
+}

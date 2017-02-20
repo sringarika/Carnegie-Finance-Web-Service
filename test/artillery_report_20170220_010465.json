@@ -1,0 +1,96 @@
+{
+  "aggregate": {
+    "timestamp": "2017-02-20T06:05:01.466Z",
+    "scenariosCreated": 1,
+    "scenariosCompleted": 0,
+    "requestsCompleted": 2,
+    "latency": {
+      "min": 975,
+      "max": 1210.7,
+      "median": 1092.8,
+      "p95": null,
+      "p99": null
+    },
+    "rps": {
+      "count": 2,
+      "mean": 0.8
+    },
+    "scenarioDuration": {
+      "min": null,
+      "max": null,
+      "median": null,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "web service task self-generated test plan": 1
+    },
+    "errors": {
+      "Failed match": 1
+    },
+    "codes": {
+      "200": 2
+    },
+    "matches": 1,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 1,
+        "arrivalCount": 1
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-02-20T06:05:01.461Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 2,
+      "latency": {
+        "min": 975,
+        "max": 1210.7,
+        "median": 1092.8,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 2,
+        "mean": 0.8
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "web service task self-generated test plan": 1
+      },
+      "errors": {
+        "Failed match": 1
+      },
+      "codes": {
+        "200": 2
+      },
+      "matches": 1,
+      "latencies": [
+        [
+          1487570700184,
+          "d52c7c54-dfe7-4315-8e41-d3bea1cf8908",
+          1210744914,
+          200
+        ],
+        [
+          1487570701176,
+          "d52c7c54-dfe7-4315-8e41-d3bea1cf8908",
+          974950049,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 2
+    }
+  ]
+}

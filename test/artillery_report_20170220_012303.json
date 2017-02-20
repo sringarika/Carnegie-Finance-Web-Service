@@ -1,0 +1,525 @@
+{
+  "aggregate": {
+    "timestamp": "2017-02-20T06:24:16.554Z",
+    "scenariosCreated": 1,
+    "scenariosCompleted": 1,
+    "requestsCompleted": 47,
+    "latency": {
+      "min": 3.4,
+      "max": 25296.5,
+      "median": 152.8,
+      "p95": 2082.6,
+      "p99": null
+    },
+    "rps": {
+      "count": 47,
+      "mean": 1.12
+    },
+    "scenarioDuration": {
+      "min": 42653.5,
+      "max": 42653.5,
+      "median": 42653.5,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "web service task self-generated test plan": 1
+    },
+    "errors": {},
+    "codes": {
+      "200": 47
+    },
+    "matches": 47,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 1,
+        "arrivalCount": 1
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-02-20T06:23:27.091Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-02-20T06:23:37.253Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 1,
+        "mean": 0.36
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "web service task self-generated test plan": 1
+      },
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 3
+    },
+    {
+      "timestamp": "2017-02-20T06:23:47.258Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 10
+    },
+    {
+      "timestamp": "2017-02-20T06:23:57.264Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 10
+    },
+    {
+      "timestamp": "2017-02-20T06:24:07.275Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 4,
+      "latency": {
+        "min": 762.3,
+        "max": 25296.5,
+        "median": 2495,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 4,
+        "mean": 0.54
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {
+        "200": 4
+      },
+      "matches": 4,
+      "latencies": [
+        [
+          1487571839802,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          25296518792,
+          200
+        ],
+        [
+          1487571843846,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          3955703149,
+          200
+        ],
+        [
+          1487571844937,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          1034241020,
+          200
+        ],
+        [
+          1487571845705,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          762315653,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 9
+    },
+    {
+      "timestamp": "2017-02-20T06:24:16.547Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 1,
+      "requestsCompleted": 43,
+      "latency": {
+        "min": 3.4,
+        "max": 1752,
+        "median": 120.8,
+        "p95": 1518.7,
+        "p99": null
+      },
+      "rps": {
+        "count": 42,
+        "mean": 4.57
+      },
+      "scenarioDuration": {
+        "min": 42653.5,
+        "max": 42653.5,
+        "median": 42653.5,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {
+        "200": 43
+      },
+      "matches": 43,
+      "latencies": [
+        [
+          1487571847359,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          1650055442,
+          200
+        ],
+        [
+          1487571848811,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          1447990622,
+          200
+        ],
+        [
+          1487571849297,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          483338091,
+          200
+        ],
+        [
+          1487571849479,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          179122671,
+          200
+        ],
+        [
+          1487571851236,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          1751997472,
+          200
+        ],
+        [
+          1487571851585,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          345972739,
+          200
+        ],
+        [
+          1487571851672,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          81758524,
+          200
+        ],
+        [
+          1487571851880,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          205623394,
+          200
+        ],
+        [
+          1487571852018,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          135248171,
+          200
+        ],
+        [
+          1487571852203,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          179166449,
+          200
+        ],
+        [
+          1487571852329,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          120792141,
+          200
+        ],
+        [
+          1487571852504,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          169531519,
+          200
+        ],
+        [
+          1487571852840,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          332619721,
+          200
+        ],
+        [
+          1487571852994,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          152830449,
+          200
+        ],
+        [
+          1487571853374,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          377421859,
+          200
+        ],
+        [
+          1487571853535,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          158500934,
+          200
+        ],
+        [
+          1487571853565,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          27958578,
+          200
+        ],
+        [
+          1487571853774,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          205998025,
+          200
+        ],
+        [
+          1487571853783,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          5143352,
+          200
+        ],
+        [
+          1487571853791,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          3824652,
+          200
+        ],
+        [
+          1487571853798,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          3350611,
+          200
+        ],
+        [
+          1487571854079,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          278261204,
+          200
+        ],
+        [
+          1487571854673,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          591605277,
+          200
+        ],
+        [
+          1487571854927,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          251493088,
+          200
+        ],
+        [
+          1487571855012,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          81718501,
+          200
+        ],
+        [
+          1487571855115,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          100601442,
+          200
+        ],
+        [
+          1487571855141,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          23382689,
+          200
+        ],
+        [
+          1487571855166,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          22786199,
+          200
+        ],
+        [
+          1487571855324,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          155013665,
+          200
+        ],
+        [
+          1487571855362,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          29844593,
+          200
+        ],
+        [
+          1487571855386,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          21545553,
+          200
+        ],
+        [
+          1487571855404,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          13169280,
+          200
+        ],
+        [
+          1487571855500,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          94123871,
+          200
+        ],
+        [
+          1487571855545,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          40563617,
+          200
+        ],
+        [
+          1487571855561,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          12753443,
+          200
+        ],
+        [
+          1487571855777,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          211629987,
+          200
+        ],
+        [
+          1487571855817,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          38199489,
+          200
+        ],
+        [
+          1487571855853,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          32486292,
+          200
+        ],
+        [
+          1487571855881,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          25094815,
+          200
+        ],
+        [
+          1487571855936,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          52330154,
+          200
+        ],
+        [
+          1487571855961,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          16682991,
+          200
+        ],
+        [
+          1487571855984,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          16187335,
+          200
+        ],
+        [
+          1487571856362,
+          "4d5b9220-ecd6-42f1-8320-28173a0e605f",
+          375786204,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 9
+    }
+  ]
+}

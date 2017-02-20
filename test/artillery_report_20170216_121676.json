@@ -1,0 +1,114 @@
+{
+  "aggregate": {
+    "timestamp": "2017-02-16T17:17:06.787Z",
+    "scenariosCreated": 1,
+    "scenariosCompleted": 0,
+    "requestsCompleted": 5,
+    "latency": {
+      "min": 21.5,
+      "max": 227.8,
+      "median": 22.6,
+      "p95": null,
+      "p99": null
+    },
+    "rps": {
+      "count": 5,
+      "mean": 10
+    },
+    "scenarioDuration": {
+      "min": null,
+      "max": null,
+      "median": null,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "web service task self-generated test plan": 1
+    },
+    "errors": {
+      "Failed match": 1
+    },
+    "codes": {
+      "200": 5
+    },
+    "matches": 4,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 1,
+        "arrivalCount": 1
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-02-16T17:17:06.778Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 5,
+      "latency": {
+        "min": 21.5,
+        "max": 227.8,
+        "median": 22.6,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 5,
+        "mean": 10.2
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "web service task self-generated test plan": 1
+      },
+      "errors": {
+        "Failed match": 1
+      },
+      "codes": {
+        "200": 5
+      },
+      "matches": 4,
+      "latencies": [
+        [
+          1487265426517,
+          "17bdd771-5aac-4293-998e-ad3ee61c7c9f",
+          227770510,
+          200
+        ],
+        [
+          1487265426556,
+          "17bdd771-5aac-4293-998e-ad3ee61c7c9f",
+          25403111,
+          200
+        ],
+        [
+          1487265426580,
+          "17bdd771-5aac-4293-998e-ad3ee61c7c9f",
+          21545617,
+          200
+        ],
+        [
+          1487265426605,
+          "17bdd771-5aac-4293-998e-ad3ee61c7c9f",
+          22624749,
+          200
+        ],
+        [
+          1487265426629,
+          "17bdd771-5aac-4293-998e-ad3ee61c7c9f",
+          21715249,
+          200
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    }
+  ]
+}

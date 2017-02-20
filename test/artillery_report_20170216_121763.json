@@ -1,0 +1,294 @@
+{
+  "aggregate": {
+    "timestamp": "2017-02-16T17:18:40.681Z",
+    "scenariosCreated": 2,
+    "scenariosCompleted": 0,
+    "requestsCompleted": 12,
+    "latency": {
+      "min": 28.5,
+      "max": 980.3,
+      "median": 46,
+      "p95": 938.5,
+      "p99": null
+    },
+    "rps": {
+      "count": 12,
+      "mean": 0.51
+    },
+    "scenarioDuration": {
+      "min": null,
+      "max": null,
+      "median": null,
+      "p95": null,
+      "p99": null
+    },
+    "scenarioCounts": {
+      "web service task self-generated test plan": 2
+    },
+    "errors": {
+      "Failed match": 2
+    },
+    "codes": {
+      "200": 10,
+      "404": 2
+    },
+    "matches": 10,
+    "customStats": {},
+    "phases": [
+      {
+        "duration": 45,
+        "arrivalCount": 2
+      }
+    ]
+  },
+  "intermediate": [
+    {
+      "timestamp": "2017-02-16T17:18:01.097Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-02-16T17:18:11.102Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-02-16T17:18:21.111Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 6,
+      "latency": {
+        "min": 34.6,
+        "max": 980.3,
+        "median": 148.2,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 6,
+        "mean": 1.53
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "web service task self-generated test plan": 1
+      },
+      "errors": {
+        "Failed match": 1
+      },
+      "codes": {
+        "200": 5,
+        "404": 1
+      },
+      "matches": 5,
+      "latencies": [
+        [
+          1487265497751,
+          "b6a4f538-dace-4760-8bb9-81935739fe85",
+          562342110,
+          200
+        ],
+        [
+          1487265497916,
+          "b6a4f538-dace-4760-8bb9-81935739fe85",
+          144070079,
+          200
+        ],
+        [
+          1487265497957,
+          "b6a4f538-dace-4760-8bb9-81935739fe85",
+          37002046,
+          200
+        ],
+        [
+          1487265497993,
+          "b6a4f538-dace-4760-8bb9-81935739fe85",
+          34644049,
+          200
+        ],
+        [
+          1487265498976,
+          "b6a4f538-dace-4760-8bb9-81935739fe85",
+          980327201,
+          200
+        ],
+        [
+          1487265499132,
+          "b6a4f538-dace-4760-8bb9-81935739fe85",
+          152363524,
+          404
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 1
+    },
+    {
+      "timestamp": "2017-02-16T17:18:31.155Z",
+      "scenariosCreated": 0,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 0,
+      "latency": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 0,
+        "mean": null
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {},
+      "errors": {},
+      "codes": {},
+      "matches": 0,
+      "latencies": [],
+      "customStats": {},
+      "concurrency": 0,
+      "pendingRequests": 0
+    },
+    {
+      "timestamp": "2017-02-16T17:18:40.677Z",
+      "scenariosCreated": 1,
+      "scenariosCompleted": 0,
+      "requestsCompleted": 6,
+      "latency": {
+        "min": 28.5,
+        "max": 348,
+        "median": 31.4,
+        "p95": null,
+        "p99": null
+      },
+      "rps": {
+        "count": 6,
+        "mean": 5.94
+      },
+      "scenarioDuration": {
+        "min": null,
+        "max": null,
+        "median": null,
+        "p95": null,
+        "p99": null
+      },
+      "scenarioCounts": {
+        "web service task self-generated test plan": 1
+      },
+      "errors": {
+        "Failed match": 1
+      },
+      "codes": {
+        "200": 5,
+        "404": 1
+      },
+      "matches": 5,
+      "latencies": [
+        [
+          1487265519721,
+          "23b4aac6-394f-4b41-8ace-1d46d5a16e30",
+          55053660,
+          200
+        ],
+        [
+          1487265519753,
+          "23b4aac6-394f-4b41-8ace-1d46d5a16e30",
+          28509454,
+          200
+        ],
+        [
+          1487265519789,
+          "23b4aac6-394f-4b41-8ace-1d46d5a16e30",
+          33389839,
+          200
+        ],
+        [
+          1487265519820,
+          "23b4aac6-394f-4b41-8ace-1d46d5a16e30",
+          29319550,
+          200
+        ],
+        [
+          1487265520171,
+          "23b4aac6-394f-4b41-8ace-1d46d5a16e30",
+          347977502,
+          200
+        ],
+        [
+          1487265520203,
+          "23b4aac6-394f-4b41-8ace-1d46d5a16e30",
+          28672577,
+          404
+        ]
+      ],
+      "customStats": {},
+      "concurrency": 1,
+      "pendingRequests": 1
+    }
+  ]
+}

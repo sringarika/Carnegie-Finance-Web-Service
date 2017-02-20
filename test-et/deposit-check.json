@@ -1,0 +1,264 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 30, "arrivalCount": 300}
+    ],
+    "payload": [
+      {
+        "path": "UserData.csv",
+        "fields": ["fname","lname","address","city","state","zip","email","username","password"],
+        "order": "sequence"
+      },
+      {
+        "path": "Portfolio.csv",
+        "fields": ["name","symbol","initial_value"],
+        "order": "sequence"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "web service task self-generated test plan",
+      "flow": [
+        {"post": {
+          "url": "/login",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+          }
+        }},
+        {"post": {
+          "url": "/createFund",
+          "json": {"symbol": "{{username}}-FUND", "name": "{{username}}-FUND", "initial_value": "1"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund was successfully created"
+          }
+        }},
+        {"post": {
+          "url": "/createCustomerAccount",
+          "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"{{{fname}}} was registered successfully"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The check was successfully deposited"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"2.3"},
+          "match":{
+            "json":"$.message",
+            "value":"The check was successfully deposited"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"4.56"},
+          "match":{
+            "json":"$.message",
+            "value":"The check was successfully deposited"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"The check was successfully deposited"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}-doesnotexist", "cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"", "cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":233, "cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":true, "cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":[1,2,3]},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"faskdfljaw"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"."},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"-0.01"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"1e100"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"-0.0001"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }},
+        {"post": {
+          "url": "/logout",
+          "match":{
+            "json":"$.message",
+            "value":"You have been successfully logged out"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"123"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+        }},
+        {"post": {
+          "url": "/login",
+          "json": {"username":"{{username}}", "password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome {{fname}}"
+          }
+        }},
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}", "cash":"123"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be an employee to perform this action"
+          }
+        }},
+        {"get": {
+          "url": "/viewPortfolio",
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have any funds in your Portfolio"
+          }
+        }},
+        {"post": {
+          "url": "/buyFund",
+          "json": {"symbol": "{{username}}-FUND", "cashValue": "1"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund has been successfully purchased"
+          }
+        }},
+        {"get": {
+          "url": "/viewPortfolio",
+          "afterResponse": "parsePortfolio",
+          "match":[
+            {
+              "json":"$.message",
+              "value":"The action was successful"
+            },
+            {
+              "json":"$.cash",
+              "value":"6.86"
+            },
+            {
+              "json":"$.$shares['{{username}}-FUND']",
+              "value":"1"
+            },
+            {
+              "json":"$.$price['{{username}}-FUND']",
+              "value":"1.00"
+            }
+          ]
+        }}
+      ]
+    }
+  ]
+}
