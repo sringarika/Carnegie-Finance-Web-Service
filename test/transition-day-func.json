@@ -1,0 +1,142 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 1, "arrivalCount": 1}
+    ],
+    "payload": [
+      {
+        "path": "UserData.csv",
+        "fields": ["fname","lname","address","city","state","zip","email","username","password"],
+        "order": "sequence"
+      },
+      {
+        "path": "Portfolio.csv",
+        "fields": ["name","symbol","initial_value"],
+        "order": "sequence"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "Create 100 funds and run 100 transition days, validating price.",
+      "flow": [
+        {"post": {
+          "url": "/login",
+          "afterResponse": "initFundPrices",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+          }
+        }},
+        {"post": {
+          "url": "/createCustomerAccount",
+          "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"9999999","username":"{{{username}}}","password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"{{{fname}}} was registered successfully"
+          }
+        }},
+        {"loop": [
+          {"post": {
+            "url": "/createFund",
+            "beforeRequest": "fillInPrice",
+            "json": {"symbol": "test-$i", "name": "test-$i", "initial_value": "$price-i"},
+            "match":{
+              "json":"$.message",
+              "value":"The fund was successfully created"
+            }
+          }}
+        ], "count": 100},
+        {"post": {
+          "url": "/logout",
+          "match":{
+            "json":"$.message",
+            "value":"You have been successfully logged out"
+          }
+        }},
+        {"post": {
+          "url": "/login",
+          "json": {"username":"{{username}}", "password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome {{fname}}"
+          }
+        }},
+        {"loop": [
+          {"post": {
+            "url": "/buyFund",
+            "beforeRequest": "fillInPrice",
+            "json": {"symbol": "test-$i", "cashValue": "$price-i"},
+            "match":{
+              "json":"$.message",
+              "value":"The fund has been successfully purchased"
+            }
+          }}
+        ], "count": 100},
+        {"post": {
+          "url": "/logout",
+          "match":{
+            "json":"$.message",
+            "value":"You have been successfully logged out"
+          }
+        }},
+        {"loop": [
+          {"post": {
+            "url": "/login",
+            "json": {"username":"jadmin", "password":"admin"},
+            "match":{
+              "json":"$.message",
+              "value":"Welcome Jane"
+            }
+          }},
+          {"post": {
+            "url": "/transitionDay",
+            "match": {
+              "json":"$.message",
+              "value":"The fund prices have been successfully recalculated"
+            }
+          }},
+          {"post": {
+            "url": "/logout",
+            "match":{
+              "json":"$.message",
+              "value":"You have been successfully logged out"
+            }
+          }},
+          {"post": {
+            "url": "/login",
+            "json": {"username":"{{username}}", "password":"{{password}}"},
+            "match":{
+              "json":"$.message",
+              "value":"Welcome {{fname}}"
+            }
+          }},
+          {"get": {
+            "url": "/viewPortfolio",
+            "afterResponse": "validateTransitionDay",
+            "match":[
+              {
+                "json":"$.message",
+                "value":"The action was successful"
+              },
+              {
+                "json":"$.$valid",
+                "value":true
+              }
+            ]
+          }},
+          {"post": {
+            "url": "/logout",
+            "match":{
+              "json":"$.message",
+              "value":"You have been successfully logged out"
+            }
+          }}
+        ], "count": 100}
+      ]
+    }
+  ]
+}

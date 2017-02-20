@@ -1,0 +1,32 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 1, "arrivalCount": 20}
+    ],
+    "payload": [
+      {
+        "path": "Portfolio.csv",
+        "fields": ["name","symbol","initial_value"],
+        "order": "sequence"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "Initialization 1 - Create all funds with admin session",
+      "flow": [
+        {"post": {
+          "url": "/createFund",
+          "beforeRequest": "reuseSession",
+          "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund was successfully created"
+          }
+        }}
+      ]
+    }
+  ]
+}

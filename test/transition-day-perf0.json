@@ -1,0 +1,43 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 30, "arrivalCount": 300}
+    ],
+    "payload": [
+      {
+        "path": "UserData.csv",
+        "fields": ["fname","lname","address","city","state","zip","email","username","password"],
+        "order": "sequence"
+      },
+      {
+        "path": "Portfolio.csv",
+        "fields": ["name","symbol","initial_value"],
+        "order": "sequence"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "Run transitionDay with no funds",
+      "flow": [
+        {"post": {
+          "url": "/login",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+          }
+        }},
+        {"post": {
+          "url": "/transitionDay",
+          "match":{
+            "json":"$.message",
+            "value":"The fund prices have been successfully recalculated"
+          }
+        }}
+      ]
+    }
+  ]
+}

@@ -3,7 +3,7 @@
     "target": "http://localhost:8080",
     "processor": "./processor.js",
     "phases": [
-      {"duration": 1, "arrivalCount": 1}
+      {"duration": 2, "arrivalCount": 1000}
     ],
     "payload": [
     {
@@ -24,293 +24,51 @@
       "flow": [
         {"post": {
           "url": "/login",
-          "json": {"username":"jadmin","password":"admin"},
+          "json": {"username":"{{{username}}}","password":"{{password}}"},
           "match":{
             "json":"$.message",
-            "value":"Welcome Jane"
+            "value":"Welcome {{{fname}}}"
           }
          }
        },
-        {"post": {
+       {"post": {
            "url": "/createCustomerAccount",
-           "json": {"fname":"Youjia", "lname":"Zhong", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"youjiaz@cmu.edu","cash":"100.00","username":"zhisuocao","password":"123456"},
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
            "match":{
-           "json":"$.message",
-           "value":"Youjia was registered successfully"
-         }
+             "json":"$.message",
+             "value":"You must be an employee to perform this action"
+           }
+          }
+        },
+        {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"You must be an employee to perform this action"
         }
-        },
-        {"post": {
-           "url": "/createCustomerAccount",
-           "json": {"fname":"Junyi", "lname":"Song", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"gloria@cmu.edu","cash":"1000.00","username":"junyi","password":"666666"},
-           "match":{
-             "json":"$.message",
-             "value":"Junyi was registered successfully"
-           }
-          }
-        },
-        {"post": {
-           "url": "/createCustomerAccount",
-           "json": {"fname":"Varun", "lname":"Pant", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"varunp@cmu.edu","cash":"111.00","username":"varun","password":"888888"},
-           "match":{
-             "json":"$.message",
-             "value":"Varun was registered successfully"
-           }
-          }
-        },
-        {"post": {
-           "url": "/createCustomerAccount",
-           "json": {"fname":"Yuchen", "lname":"Shi", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"yuchens@cmu.edu","cash":"111.11","username":"yuchen","password":"111111"},
-           "match":{
-             "json":"$.message",
-             "value":"Yuchen was registered successfully"
-           }
-          }
-        },
-        {"post": {
-           "url": "/createCustomerAccount",
-           "json": {"fname":"Sringarika", "lname":"Pandey", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"sring@cmu.edu","cash":"222.22","username":"sring","password":"222222"},
-           "match":{
-             "json":"$.message",
-             "value":"Sringarika was registered successfully"
-           }
-          }
-        },
-        {"post": {
-            "url": "/logout",
-            "match":{
-              "json":"$.message",
-              "value":"You have been successfully logged out"
-            }
-           }
-         },
-        {"post": {
-          "url": "/login",
-          "json": {"username":"jadmin","password":"admin"},
-          "match":{
-            "json":"$.message",
-            "value":"Welcome Jane"
-          }
-         }
-       },
-       {"post": {
+       }
+      },
+      {"post": {
         "url": "/createFund",
-        "json": {"name":"Team Binary", "symbol":"TB", "initial_value":"111.88"},
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
         "match":{
           "json":"$.message",
-          "value":"The fund was successfully created"
+          "value":"You must be an employee to perform this action"
            }
          }
        },
        {"post": {
-        "url": "/createFund",
-        "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
+        "url": "/transitionDay",
         "match":{
           "json":"$.message",
-          "value":"The fund was successfully created"
+          "value":"You must be an employee to perform this action"
            }
-         }
-       },
-       {"post": {
-        "url": "/createFund",
-        "json": {"name":"Trump The Best", "symbol":"TTB", "initial_value":"0.01"},
-        "match":{
-          "json":"$.message",
-          "value":"The fund was successfully created"
-           }
-         }
-       },
-       {"post": {
-        "url": "/createFund",
-        "json": {"name":"Ohio State", "symbol":"OSU", "initial_value":"88.88"},
-        "match":{
-          "json":"$.message",
-          "value":"The fund was successfully created"
-           }
-         }
-       },
-       {"post": {
-        "url": "/createFund",
-        "json": {"name":"Obama We Miss You", "symbol":"OWMU", "initial_value":"18.88"},
-        "match":{
-          "json":"$.message",
-          "value":"The fund was successfully created"
-           }
-         }
-       },
-       {"post": {
-        "url": "/depositCheck",
-        "json": {"username":"zhisuocao", "cash":"1000.01"},
-        "match":{
-          "json":"$.message",
-          "value":"The check was successfully deposited"
-           }
-         }
-       },
-       {"post": {
-        "url": "/depositCheck",
-        "json": {"username":"junyi", "cash":"1888.01"},
-        "match":{
-          "json":"$.message",
-          "value":"The check was successfully deposited"
-           }
-         }
-       },
-       {"post": {
-        "url": "/depositCheck",
-        "json": {"username":"varun", "cash":"1888.01"},
-        "match":{
-          "json":"$.message",
-          "value":"The check was successfully deposited"
-           }
-         }
-       },
-       {"post": {
-        "url": "/depositCheck",
-        "json": {"username":"yuchen", "cash":"1000.01"},
-        "match":{
-          "json":"$.message",
-          "value":"The check was successfully deposited"
-           }
-         }
-       },
-       {"post": {
-        "url": "/depositCheck",
-        "json": {"username":"sring", "cash":"2999.01"},
-        "match":{
-          "json":"$.message",
-          "value":"The check was successfully deposited"
-           }
-         }
-       }, 
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"TB","cashValue":"1000.01"},
-          "match":{
-            "json":"$.message",
-            "value":"You must be a customer to perform this action"
-          }
-         }
-       },
-       {"post": {
-          "url": "/requestCheck",
-          "json": {"cashValue":"100.01"},
-          "match":{
-            "json":"$.message",
-            "value":"You must be a customer to perform this action"
-          }
-         }
-       },
-       {"post": {
-          "url": "/sellFund",
-          "json": {"symbol":"CMU","numShares":"11"},
-          "match":{
-            "json":"$.message",
-            "value":"You must be a customer to perform this action"
-          }
-         }
-       },
-       {"post": {
-        "url": "/logout",
-        "match":{
-          "json":"$.message",
-          "value":"You have been successfully logged out"
-        }
-        }
-       },
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"TB","cashValue":"1000.01"},
-          "match":{
-            "json":"$.message",
-            "value":"You are not currently logged in"
-          }
-         }
-       },
-       {"post": {
-          "url": "/requestCheck",
-          "json": {"cashValue":"100.01"},
-          "match":{
-            "json":"$.message",
-            "value":"You are not currently logged in"
-          }
-         }
-       },
-       {"post": {
-          "url": "/sellFund",
-          "json": {"symbol":"CMU","numShares":"11"},
-          "match":{
-            "json":"$.message",
-            "value":"You are not currently logged in"
-          }
-         }
-       },
-       {"post": {
-          "url": "/login",
-          "json": {"username":"zhisuocao","password":"123456"},
-          "match":{
-            "json":"$.message",
-            "value":"Welcome Youjia"
-          }
          }
        },
        {"post": {
           "url": "/buyFund",
-          "json": {"symbol":"CMU","cashValue":"188.99"},
-          "match":{
-            "json":"$.message",
-            "value":"The fund has been successfully purchased"
-          }
-         }
-       },
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"OSU","cashValue":"188.99"},
-          "match":{
-            "json":"$.message",
-            "value":"The fund has been successfully purchased"
-          }
-         }
-       },
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"TTB","cashValue":"20.01"},
-          "match":{
-            "json":"$.message",
-            "value":"The fund has been successfully purchased"
-          }
-         }
-       },
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"OWMU","cashValue":"188.01"},
-          "match":{
-            "json":"$.message",
-            "value":"The fund has been successfully purchased"
-          }
-         }
-       },
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"TB","cashValue":"1.01"},
-          "match":{
-            "json":"$.message",
-            "value":"You didn’t provide enough cash to make this purchase"
-          }
-         }
-       },
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"TB","cashValue":"1000.01"},
-          "match":{
-            "json":"$.message",
-            "value":"You don’t have enough cash in your account to make this purchase"
-          }
-         }
-       },
-       {"post": {
-          "url": "/buyFund",
-          "json": {"symbol":"","cashValue":"1000.01"},
+          "json": {"symbol":"","cashValue":"{{{initial_value}}}"},
           "match":{
             "json":"$.message",
             "value":"The input you provided is not valid"
@@ -319,7 +77,7 @@
        },
        {"post": {
           "url": "/buyFund",
-          "json": {"symbol":"CMU","cashValue":""},
+          "json": {"symbol":"{{{symbol}}}","cashValue":""},
           "match":{
             "json":"$.message",
             "value":"The input you provided is not valid"
@@ -337,7 +95,16 @@
        },
        {"post": {
           "url": "/buyFund",
-          "json": {"symbol":"CMU","cashValue":"-188.88"},
+          "json": {"symbol":"{{{symbol}}}","cashValue":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"You didn’t provide enough cash to make this purchase"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"-18.00"},
           "match":{
             "json":"$.message",
             "value":"The input you provided is not valid"
@@ -345,8 +112,63 @@
          }
        },
        {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"nonnumber"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"{{{initial_value}}}"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund has been successfully purchased"
+          }
+         }
+       },
+       {"get": {
+          "url": "/viewPortfolio",
+          "afterResponse": "parsePortfolio",
+          "match":[
+            {
+              "json":"$.message",
+              "value":"The action was successful"
+            },
+            {
+              "json":"$.$shares['{{{name}}}']",
+              "value":"1"
+            },
+            {
+              "json":"$.$price['{{{name}}}']",
+              "value":"{{{initial_value}}}"
+            }
+          ]
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"0.05"},
+          "match":{
+            "json":"$.message",
+            "value":"You didn’t provide enough cash to make this purchase"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"2000"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have enough cash in your account to make this purchase"
+          }
+         }
+       },
+       {"post": {
           "url": "/requestCheck",
-          "json": {"cashValue":"100.01"},
+          "json": {"cashValue":"199.99"},
           "match":{
             "json":"$.message",
             "value":"The check has been successfully requested"
@@ -355,7 +177,7 @@
        },
        {"post": {
           "url": "/requestCheck",
-          "json": {"cashValue":"400.01"},
+          "json": {"cashValue":"0"},
           "match":{
             "json":"$.message",
             "value":"The check has been successfully requested"
@@ -372,35 +194,26 @@
          }
        },
        {"post": {
-          "url": "/sellFund",
-          "json": {"symbol":"CMU","numShares":"1"},
+          "url": "/requestCheck",
+          "json": {"cashValue":"nonnumber"},
           "match":{
             "json":"$.message",
-            "value":"The shares have been successfully sold"
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"2000"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have sufficient funds in your account to cover the requested check"
           }
          }
        },
        {"post": {
           "url": "/sellFund",
-          "json": {"symbol":"OSU","numShares":"2"},
-          "match":{
-            "json":"$.message",
-            "value":"The shares have been successfully sold"
-          }
-         }
-       },
-       {"post": {
-          "url": "/sellFund",
-          "json": {"symbol":"OSU","numShares":"100"},
-          "match":{
-            "json":"$.message",
-            "value":"You don’t have that many shares in your portfolio"
-          }
-         }
-       },
-       {"post": {
-          "url": "/sellFund",
-          "json": {"symbol":"OSU","numShares":"-100"},
+          "json": {"symbol":"","numShares":"1"},
           "match":{
             "json":"$.message",
             "value":"The input you provided is not valid"
@@ -409,16 +222,7 @@
        },
        {"post": {
           "url": "/sellFund",
-          "json": {"symbol":"","numShares":"-100"},
-          "match":{
-            "json":"$.message",
-            "value":"The input you provided is not valid"
-          }
-         }
-       },
-       {"post": {
-          "url": "/sellFund",
-          "json": {"symbol":"OSU","numShares":""},
+          "json": {"symbol":"{{{symbol}}}","numShares":""},
           "match":{
             "json":"$.message",
             "value":"The input you provided is not valid"
@@ -434,41 +238,67 @@
           }
          }
        },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"-1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"nonnumber"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"2"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have that many shares in your portfolio"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The shares have been successfully sold"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"The shares have been successfully sold"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have that many shares in your portfolio"
+          }
+         }
+       },
        {"get": {
           "url": "/viewPortfolio",
           "afterResponse": "parsePortfolio",
           "match":[
             {
               "json":"$.message",
-              "value":"The action was successful"
-            },
-            {
-              "json":"$.cash",
-              "value":"233.90"
-            },
-            {
-              "json":"$.$shares['Carnegie Mellon']",
-              "value":"16"
-            },
-            {
-              "json":"$.$price['Carnegie Mellon']",
-              "value":"11.01"
-            },
-            {
-              "json":"$.$shares['Obama We Miss You']",
-              "value":"9"
-            },
-            {
-              "json":"$.$price['Obama We Miss You']",
-              "value":"18.88"
-            },
-            {
-              "json":"$.$shares['Trump The Best']",
-              "value":"2001"
-            },
-            {
-              "json":"$.$price['Trump The Best']",
-              "value":"0.01"
+              "value":"You don’t have any funds in your Portfolio"
             }
           ]
          }

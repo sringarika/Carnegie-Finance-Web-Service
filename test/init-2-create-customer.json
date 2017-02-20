@@ -1,0 +1,32 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 2, "arrivalCount": 1000}
+    ],
+    "payload": [
+      {
+        "path": "UserData.csv",
+        "fields": ["fname","lname","address","city","state","zip","email","username","password"],
+        "order": "sequence"
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "Initialization 2 - Create customers with the admin session",
+      "flow": [
+        {"post": {
+          "url": "/createCustomerAccount",
+          "beforeRequest": "reuseSession",
+          "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"2000","username":"{{{username}}}","password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"{{{fname}}} was registered successfully"
+          }
+        }}
+      ]
+    }
+  ]
+}
