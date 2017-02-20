@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import fund.mymutual.cfsws.business.BusinessLogicException;
 import fund.mymutual.cfsws.model.CFSRole;
 
 @ControllerAdvice
@@ -35,7 +36,6 @@ public class CFSErrorHandler {
     @ResponseBody
     @Order(100)
     public MessageDTO processValidationError(HttpMessageNotReadableException ex, HttpServletRequest request) {
-        logException(request, ex);
         return new MessageDTO("The input you provided is not valid");
     }
 
@@ -44,7 +44,6 @@ public class CFSErrorHandler {
     @ResponseBody
     @Order(100)
     public MessageDTO processUnauthorizedException(CFSUnauthorizedException ex, HttpServletRequest request) {
-        logException(request, ex);
         return new MessageDTO("You are not currently logged in");
     }
 
@@ -53,7 +52,6 @@ public class CFSErrorHandler {
     @ResponseBody
     @Order(100)
     public MessageDTO processForbiddenException(CFSForbiddenException ex, HttpServletRequest request) {
-        logException(request, ex);
         if (ex.getRoleRequired().equals(CFSRole.Employee)) {
             return new MessageDTO("You must be an employee to perform this action");
         } else {
@@ -61,6 +59,29 @@ public class CFSErrorHandler {
         }
     }
 
+    @ExceptionHandler(BusinessLogicException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @Order(100)
+    public MessageDTO processForbiddenException(BusinessLogicException ex, HttpServletRequest request) {
+        return new MessageDTO("The input you provided is not valid");
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @Order(100)
+    public MessageDTO processNumberFormatException(NumberFormatException ex, HttpServletRequest request) {
+        return new MessageDTO("The input you provided is not valid");
+    }
+
+    @ExceptionHandler(ArithmeticException.class)
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    @Order(100)
+    public MessageDTO processArithmeticException(ArithmeticException ex, HttpServletRequest request) {
+        return new MessageDTO("The input you provided is not valid");
+    }
 
     /**
      * A catch-all exception handler as a last resort.
@@ -91,17 +112,5 @@ public class CFSErrorHandler {
         for (FieldError fieldError: fieldErrors) {
             System.out.println("\t" + fieldError.getField() + ": " + fieldError.getDefaultMessage());
         }
-    }
-
-    private void logException(HttpServletRequest request, HttpMessageNotReadableException ex) {
-        System.out.println("Invalid JSON for " + request.getMethod() + " " + request.getRequestURI());
-    }
-
-    private void logException(HttpServletRequest request, CFSUnauthorizedException ex) {
-        System.out.println("User not logged in for " + request.getMethod() + " " + request.getRequestURI());
-    }
-
-    private void logException(HttpServletRequest request, CFSForbiddenException ex) {
-        System.out.println("User forbidden for " + request.getMethod() + " " + request.getRequestURI());
     }
 }
