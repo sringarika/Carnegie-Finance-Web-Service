@@ -34,6 +34,9 @@ function validateTransitionDay(requestParams, response, context, ee, next) {
     for (var i = 0; i < 100; i++) {
       var oldPrice = context.vars.$price[i];
       var newPrice = parseFloat(response.body.$price['test-' + i]);
+      if (newPrice <= 0) {
+        return next(new Error('Price for test-' + i + ' became zero!'));
+      }
       var percent = Math.round(newPrice * 100 / oldPrice);
       if (percent < 90) {
         return next(new Error('Price for test-' + i + ' decreased more than 10%!'));
