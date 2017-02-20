@@ -1,0 +1,26 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 1, "arrivalCount": 1}
+    ],
+    "payload": []
+  },
+  "scenarios": [
+    {
+      "name": "Initialization 0 - Begin session for admin",
+      "flow": [
+        {"post": {
+          "url": "/login",
+          "afterResponse": "rememberSession",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+          }
+        }}
+      ]
+    }
+  ]
+}

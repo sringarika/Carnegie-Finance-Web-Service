@@ -3,6 +3,8 @@ module.exports = {
   initFundPrices: initFundPrices,
   fillInPrice: fillInPrice,
   validateTransitionDay: validateTransitionDay,
+  rememberSession: rememberSession,
+  reuseSession: reuseSession,
 };
 
 function fillInPrice(requestParams, context, ee, next) {
@@ -64,5 +66,35 @@ function parsePortfolio(requestParams, response, context, ee, next) {
     });
     response.body = portfolio;
   }
+  return next();
+}
+
+var sessionId = null;
+var sessionCookieName = 'CFSAuthToken';
+var fs = require('fs');
+
+function rememberSession(requestParams, response, context, ee, next) {
+  var cookies = response.headers['set-cookie'];
+  sessionId = null;
+  cookies.forEach(function (cookie) {
+    var parts = cookie.split('=');
+    if (parts[0] == sessionCookieName) {
+      sessionId = parts[1].split(';')[0]
+    }
+  });
+  if (!sessionId) {
+    return next(new Error("Cannot find cookie with name: " + sessionCookieName));
+  }
+  fs.writeFileSync('.tmp-sessionid', sessionId);
+  return next();
+}
+
+function reuseSession(requestParams, context, ee, next) {
+  if (!sessionId) {
+    sessionId = fs.readFileSync('.tmp-sessionid', {encoding: 'utf8'});
+  }
+  if (!sessionId) return next(new Error("No session remembered!"));
+  requestParams.headers = requestParams.headers || {};
+  requestParams.headers['cookie'] = sessionCookieName + '=' + sessionId;
   return next();
 }
