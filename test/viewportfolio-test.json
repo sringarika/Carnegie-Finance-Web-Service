@@ -1,0 +1,163 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 1, "arrivalCount": 1}
+    ],
+    "payload": [
+    {
+      "path": "UserData.csv",
+      "fields": ["fname","lname","address","city","state","zip","email","username","password"],
+      "order": "sequence"
+    },
+    {
+      "path": "Portfolio.csv",
+      "fields": ["name","symbol","initial_value"],
+      "order": "sequence"
+    }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "web service task self-generated test plan",
+      "flow": [
+        {"get": {
+        "url": "/viewPortfolio",
+        "match":{
+          "json":"$.message",
+          "value":"You are not currently logged in"
+           }
+         }
+       },
+        {"post": {
+          "url": "/login",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+          }
+         }
+       },
+       {"get": {
+        "url": "/viewPortfolio",
+        "match":{
+          "json":"$.message",
+          "value":"You must be a customer to perform this action"
+           }
+         }
+       },
+       {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"Junyi", "lname":"Song", "address":"5000 Forbes Ave","city":"Pittsburgh","state":"PA", "zip":"15232", "email":"gloria@cmu.edu","cash":"10000.00","username":"junyi","password":"666666"},
+           "match":{
+             "json":"$.message",
+             "value":"Junyi was registered successfully"
+           }
+          }
+        },
+        {"post": {
+        "url": "/createFund",
+        "json": {"name":"Carnegie Mellon", "symbol":"CMU", "initial_value":"11.01"},
+        "match":{
+          "json":"$.message",
+          "value":"The fund was successfully created"
+           }
+         }
+       },
+       {"post": {
+        "url": "/createFund",
+        "json": {"name":"Team Binary", "symbol":"TB", "initial_value":"111.88"},
+        "match":{
+          "json":"$.message",
+          "value":"The fund was successfully created"
+           }
+         }
+       },
+       {"post": {
+        "url": "/logout",
+        "match":{
+          "json":"$.message",
+          "value":"You have been successfully logged out"
+        }
+        }
+       },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"junyi","password":"666666"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Junyi"
+          }
+         }
+       },
+       {"get": {
+        "url": "/viewPortfolio",
+        "match":{
+          "json":"$.message",
+          "value":"You don’t have any funds in your Portfolio"
+           }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"CMU","cashValue":"1000"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund has been successfully purchased"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"2000"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund has been successfully purchased"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"CMU","numShares":"20"},
+          "match":{
+            "json":"$.message",
+            "value":"The shares have been successfully sold"
+          }
+         }
+       },
+       {"get": {
+          "url": "/viewPortfolio",
+          "afterResponse": "parsePortfolio",
+          "match":[
+            {
+              "json":"$.message",
+              "value":"The action was successful"
+            },
+            {
+              "json":"$.cash",
+              "value":"7327.34"
+            },
+            {
+              "json":"$.$shares['Carnegie Mellon']",
+              "value":"70"
+            },
+            {
+              "json":"$.$price['Carnegie Mellon']",
+              "value":"11.01"
+            },
+            {
+              "json":"$.$shares['Team Binary']",
+              "value":"17"
+            },
+            {
+              "json":"$.$price['Team Binary']",
+              "value":"111.88"
+            }
+          ]
+         }
+       }
+      ]
+    }
+  ]
+}
