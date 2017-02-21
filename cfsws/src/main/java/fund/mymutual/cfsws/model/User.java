@@ -1,6 +1,7 @@
 package fund.mymutual.cfsws.model;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,6 +15,7 @@ import org.mindrot.jbcrypt.BCrypt;
 @Table(name="cfs_user")
 public class User {
     @Id
+    @Column(columnDefinition="VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin")
     private String username;
 
     private byte[] firstName;

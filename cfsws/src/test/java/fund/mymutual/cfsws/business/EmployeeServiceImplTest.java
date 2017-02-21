@@ -94,6 +94,26 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    public void testCreateCustomerCaseSensitiveUsername() throws BusinessLogicException {
+        User user = new User();
+        user.setUsername("eXAmple");
+        user.updatePassword("secret2");
+        user.setFirstName("Foo2");
+        user.setLastName("Bar2");
+        user.setEmail("foobar2@example.com");
+        user.setAddress("Foo Bar2");
+        user.setCity("Foo2");
+        user.setState("FB2");
+        user.setZip("123452");
+        user.setCash(1232);
+        user.setRole(CFSRole.Customer);
+        employeeService.createCustomerAccount(user);
+        User result = JpaUtil.transaction(em -> (em.find(User.class, "eXAmple")));
+        Assert.assertNotNull(result);
+        Assert.assertEquals(user.getFirstName(), result.getFirstName());
+    }
+
+    @Test
     public void testDepositCheck() throws BusinessLogicException {
         employeeService.depositCheck("example", 456);
         User result = JpaUtil.transaction(em -> (em.find(User.class, "example")));
