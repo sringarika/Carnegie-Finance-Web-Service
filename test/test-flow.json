@@ -3,7 +3,7 @@
     "target": "http://localhost:8080",
     "processor": "./processor.js",
     "phases": [
-      {"duration": 1, "arrivalCount": 200}
+      {"duration": 10, "arrivalCount": 100}
     ],
     "payload": [
     {
@@ -93,6 +93,15 @@
           }
          }
        },
+       {"get": {
+          "url": "/viewPortfolio",
+          "afterResponse":"parsePortfolio",
+          "match":{
+              "json":"$.message",
+              "value":"You are not currently logged in"
+            }
+         }
+       },
         {"post": {
           "url": "/login",
           "json": {"username":"jadmin","password":"admin"},
@@ -127,6 +136,15 @@
             "json":"$.message",
             "value":"You must be a customer to perform this action"
           }
+         }
+       },
+       {"get": {
+          "url": "/viewPortfolio",
+          "afterResponse":"parsePortfolio",
+          "match":{
+              "json":"$.message",
+              "value":"You must be a customer to perform this action"
+            }
          }
        },
         {"post": {
@@ -238,6 +256,42 @@
         }
       },
       {"post": {
+          "url": "/depositCheck",
+          "json": {},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }
+      },
+      {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{username}}"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+      },
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }
+      },
+        {"post": {
+          "url": "/depositCheck",
+          "json": {"username":"{{username}}-doesnotexist", "cash":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+        }
+      },
+      {"post": {
         "url": "/depositCheck",
         "json": {"username":"", "cash":"1000.00"},
         "match":{
@@ -291,6 +345,14 @@
         }
        }
      },
+     {"post": {
+          "url": "/logout",
+          "match":{
+            "json":"$.message",
+            "value":"You have been successfully logged out"
+          }
+        }
+      },
        {"post": {
           "url": "/login",
           "json": {"username":"{{{username}}}","password":"{{password}}"},
@@ -391,6 +453,15 @@
        },
        {"post": {
           "url": "/buyFund",
+          "json": {"symbol":"#@$%^&&","cashValue":"100"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+        },
+       {"post": {
+          "url": "/buyFund",
           "json": {"symbol":"{{{symbol}}}","cashValue":"{{{initial_value}}}"},
           "match":{
             "json":"$.message",
@@ -465,6 +536,24 @@
        {"post": {
           "url": "/requestCheck",
           "json": {"cashValue":"nonnumber"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {},
           "match":{
             "json":"$.message",
             "value":"The input you provided is not valid"
@@ -571,7 +660,15 @@
             }
           ]
          }
-       }
+       },
+       {"post": {
+          "url": "/logout",
+          "match":{
+            "json":"$.message",
+            "value":"You have been successfully logged out"
+          }
+        }
+      }
      ]
     }
   ]
