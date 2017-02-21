@@ -150,6 +150,24 @@
         },
         {"post": {
            "url": "/createCustomerAccount",
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","username":"tfboys-0","password":"{{password}}"},
+           "match":{
+             "json":"$.message",
+             "value":"{{{fname}}} was registered successfully"
+           }
+          }
+        },
+        {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"","username":"tfboys-1","password":"{{password}}"},
+           "match":{
+             "json":"$.message",
+             "value":"{{{fname}}} was registered successfully"
+           }
+          }
+        },
+        {"post": {
+           "url": "/createCustomerAccount",
            "json": {"fname":"😎", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"mad","password":"{{password}}"},
            "match":{
              "json":"$.message",

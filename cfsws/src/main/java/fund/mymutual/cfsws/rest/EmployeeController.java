@@ -79,7 +79,11 @@ public class EmployeeController {
     public MessageDTO createCustomerAccount(@ModelAttribute("username") String username,
                                             @Valid @RequestBody CustomerDTO customerDTO) throws BusinessLogicException{
         User customer = new User();
-        BigDecimal bigDecimal = new BigDecimal(customerDTO.getCash());
+        String cashStr = customerDTO.getCash();
+        if (cashStr == null || cashStr.length() == 0) {
+            cashStr = "0";
+        }
+        BigDecimal bigDecimal = new BigDecimal(cashStr);
         BigDecimal newCash = bigDecimal.scaleByPowerOfTen(2);
         int cashInCents = newCash.intValueExact();
         if (cashInCents < 0) {
