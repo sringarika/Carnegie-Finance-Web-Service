@@ -1,0 +1,628 @@
+{
+  "config": {
+    "target": "http://localhost:8080",
+    "processor": "./processor.js",
+    "phases": [
+      {"duration": 1, "arrivalCount": 1}
+    ],
+    "payload": [
+    {
+      "path": "UserDataClean.csv",
+      "fields": ["fname","lname","address","city","state","zip","email","username", "password"],
+      "order": "sequence"
+    },
+    {
+      "path": "Portfolio.csv",
+      "fields": ["name","symbol","initial_value"],
+      "order": "sequence"
+    }
+  ]
+  },
+  "scenarios": [
+    {
+      "name": "Team Binary's test",
+      "flow": [
+        {"post": {
+          "url": "/login",
+          "json": {"username":"{{{username}}}","password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"There seems to be an issue with the username/password combination that you entered"
+          }
+         }
+       },
+        {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
+           "match":{
+             "json":"$.message",
+             "value":"You are not currently logged in"
+           }
+          }
+        },
+        {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"You are not currently logged in"
+        }
+       }
+      },
+      {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+        "match":{
+          "json":"$.message",
+          "value":"You are not currently logged in"
+           }
+         }
+       },
+       {"post": {
+        "url": "/transitionDay",
+        "match":{
+          "json":"$.message",
+          "value":"You are not currently logged in"
+           }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"100.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"CMU","numShares":"11"},
+          "match":{
+            "json":"$.message",
+            "value":"You are not currently logged in"
+          }
+         }
+       },
+        {"post": {
+          "url": "/login",
+          "json": {"username":"jadmin","password":"admin"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome Jane"
+             }
+           }
+         },
+         {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"TB","cashValue":"1000.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be a customer to perform this action"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"100.01"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be a customer to perform this action"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"CMU","numShares":"11"},
+          "match":{
+            "json":"$.message",
+            "value":"You must be a customer to perform this action"
+          }
+         }
+       },
+        {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"-100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"nonnumber","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      //FOR YOKA:what about intital deposit as INT_MAX OR INT_MIN ?- OVERFLOW - still input not valid right? (just laying out all my thoughts here along with corner cases., so that we think of everything...)
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"2147483647","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"","cash":"100","username":"","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"-100","username":"{{{username}}}","password":""},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+       {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"1000","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"{{{fname}}} was registered successfully"
+         }
+        }
+      },
+      //FOR YOKA: WHAT IF THE ADDRESS IS MOER THAN 255 CHARACTERS? INPUT YOU PROVIDED IS NOT VALID STILL HOLDS RIGHT? I GUESS THAT'S CORRECT:JUST CONFIRMING....
+      {"post": {
+         "url": "/createCustomerAccount",
+         "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"100","username":"{{{username}}}","password":"{{password}}"},
+         "match":{
+           "json":"$.message",
+           "value":"The input you provided is not valid"
+         }
+        }
+      },
+      {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"", "cash":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":""},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"nonnumber"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"-100.00"},
+        "match":{
+          "json":"$.message",
+          "value":"The input you provided is not valid"
+        }
+       }
+     },
+     {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"The check was successfully deposited"
+        }
+       }
+     },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"{{{username}}}","password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome {{{fname}}}"
+          }
+         }
+       },
+       //FOR YOKA: HOW ABOUT WHEN USERNAME IS BLANK OR PASSWORD IS BLANK OR BOTH?
+       {"post": {
+          "url": "/login",
+          "json": {"username":"{{{username}}}","password":""},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome {{{fname}}}"
+          }
+         }
+       },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"","password":"{{password}}"},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome {{{fname}}}"
+          }
+         }
+       },
+       {"post": {
+          "url": "/login",
+          "json": {"username":"","password":""},
+          "match":{
+            "json":"$.message",
+            "value":"Welcome {{{fname}}}"
+          }
+         }
+       },
+       ///////
+       {"post": {
+           "url": "/createCustomerAccount",
+           "json": {"fname":"{{{fname}}}", "lname":"{{lname}}", "address":"{{{address}}}","city":"{{{city}}}","state":"{{{state}}}", "zip":"{{{zip}}}", "email":"{{{email}}}","cash":"0","username":"{{{username}}}","password":"{{password}}"},
+           "match":{
+             "json":"$.message",
+             "value":"You must be an employee to perform this action"
+           }
+          }
+        },
+        {"post": {
+        "url": "/depositCheck",
+        "json": {"username":"{{{username}}}", "cash":"1000.00"},
+        "match":{
+          "json":"$.message",
+          "value":"You must be an employee to perform this action"
+        }
+       }
+      },
+      {"post": {
+        "url": "/createFund",
+        "json": {"name":"{{{name}}}", "symbol":"{{{symbol}}}", "initial_value":"{{{initial_value}}}"},
+        "match":{
+          "json":"$.message",
+          "value":"You must be an employee to perform this action"
+           }
+         }
+       },
+       {"post": {
+        "url": "/transitionDay",
+        "match":{
+          "json":"$.message",
+          "value":"You must be an employee to perform this action"
+           }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"","cashValue":"{{{initial_value}}}"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"","cashValue":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"You didn’t provide enough cash to make this purchase"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"-18.00"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"nonnumber"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"{{{initial_value}}}"},
+          "match":{
+            "json":"$.message",
+            "value":"The fund has been successfully purchased"
+          }
+         }
+       },
+       {"get": {
+          "url": "/viewPortfolio",
+          "afterResponse": "parsePortfolio",
+          "match":[
+            {
+              "json":"$.message",
+              "value":"The action was successful"
+            },
+            {
+              "json":"$.$shares['{{{name}}}']",
+              "value":"1"
+            },
+            {
+              "json":"$.$price['{{{name}}}']",
+              "value":"{{{initial_value}}}"
+            }
+          ]
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"0.05"},
+          "match":{
+            "json":"$.message",
+            "value":"You didn’t provide enough cash to make this purchase"
+          }
+         }
+       },
+       {"post": {
+          "url": "/buyFund",
+          "json": {"symbol":"{{{symbol}}}","cashValue":"2000"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have enough cash in your account to make this purchase"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"199.99"},
+          "match":{
+            "json":"$.message",
+            "value":"The check has been successfully requested"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"The check has been successfully requested"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"-100.01"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"nonnumber"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/requestCheck",
+          "json": {"cashValue":"2000"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have sufficient funds in your account to cover the requested check"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"","numShares":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"","numShares":""},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"-1"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"nonnumber"},
+          "match":{
+            "json":"$.message",
+            "value":"The input you provided is not valid"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"2"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have that many shares in your portfolio"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"The shares have been successfully sold"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"0"},
+          "match":{
+            "json":"$.message",
+            "value":"The shares have been successfully sold"
+          }
+         }
+       },
+       {"post": {
+          "url": "/sellFund",
+          "json": {"symbol":"{{{symbol}}}","numShares":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have that many shares in your portfolio"
+          }
+         }
+       },
+       //FOR YOKA: how about symbol is blank?(ignoring case cause he wont test it)
+      { "post": {
+          "url": "/sellFund",
+          "json": {"symbol":"","numShares":"1"},
+          "match":{
+            "json":"$.message",
+            "value":"You don’t have that many shares in your portfolio"
+          }
+         }
+       },
+       {"get": {
+          "url": "/viewPortfolio",
+          "afterResponse": "parsePortfolio",
+          "match":[
+            {
+              "json":"$.message",
+              "value":"You don’t have any funds in your Portfolio"
+            }
+          ]
+         }
+       }
+     ]
+    }
+  ]
+}
