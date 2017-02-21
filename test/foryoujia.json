@@ -601,16 +601,6 @@
           }
          }
        },
-       //FOR YOKA: how about symbol is blank?(ignoring case cause he wont test it)
-      { "post": {
-          "url": "/sellFund",
-          "json": {"symbol":"","numShares":"1"},
-          "match":{
-            "json":"$.message",
-            "value":"You don’t have that many shares in your portfolio"
-          }
-         }
-       },
        {"get": {
           "url": "/viewPortfolio",
           "afterResponse": "parsePortfolio",
