@@ -27,7 +27,7 @@ public class CFSErrorHandler {
     @Order(100)
     @ResponseBody
     public MessageDTO processValidationError(MethodArgumentNotValidException ex, HttpServletRequest request) {
-        logException(request, ex);
+        logExceptionInvalid(request, ex);
         return new MessageDTO("The input you provided is not valid");
     }
 
@@ -36,6 +36,7 @@ public class CFSErrorHandler {
     @ResponseBody
     @Order(100)
     public MessageDTO processValidationError(HttpMessageNotReadableException ex, HttpServletRequest request) {
+        logException(request, ex);
         return new MessageDTO("The input you provided is not valid");
     }
 
@@ -64,6 +65,7 @@ public class CFSErrorHandler {
     @ResponseBody
     @Order(100)
     public MessageDTO processForbiddenException(BusinessLogicException ex, HttpServletRequest request) {
+        logException(request, ex);
         return new MessageDTO("The input you provided is not valid");
     }
 
@@ -72,6 +74,7 @@ public class CFSErrorHandler {
     @ResponseBody
     @Order(100)
     public MessageDTO processNumberFormatException(NumberFormatException ex, HttpServletRequest request) {
+        logException(request, ex);
         return new MessageDTO("The input you provided is not valid");
     }
 
@@ -80,6 +83,7 @@ public class CFSErrorHandler {
     @ResponseBody
     @Order(100)
     public MessageDTO processArithmeticException(ArithmeticException ex, HttpServletRequest request) {
+        logException(request, ex);
         return new MessageDTO("The input you provided is not valid");
     }
 
@@ -105,12 +109,22 @@ public class CFSErrorHandler {
         return new MessageDTO("The input you provided is not valid");
     }
 
-    private void logException(HttpServletRequest request, MethodArgumentNotValidException ex) {
+    private void logExceptionInvalid(HttpServletRequest request, MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
         System.out.println("Validation Error for " + request.getMethod() + " " + request.getRequestURI());
         List<FieldError> fieldErrors = result.getFieldErrors();
         for (FieldError fieldError: fieldErrors) {
             System.out.println("\t" + fieldError.getField() + ": " + fieldError.getDefaultMessage());
+        }
+    }
+
+    private void logException(HttpServletRequest request, Exception ex) {
+        try {
+            System.out.println("Exception when handling " + request.getRequestURI() +  ": " + ex.getClass().getName());
+            String message = ex.getMessage();
+            if (message != null) System.out.println(message);
+        } catch (Throwable e) {
+
         }
     }
 }
