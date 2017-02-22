@@ -73,7 +73,7 @@ public class CustomerController {
 
         List<Position> positionList = portfolio.getPositions();
         if (positionList.size() == 0) {
-            return new MessageDTO("You don’t have any funds in your Portfolio");
+            return new MessageDTO("You don't have any funds in your Portfolio");
         }
         List<PositionDTO> funds = new ArrayList<PositionDTO>();
         for (Position position : positionList) {
@@ -105,9 +105,9 @@ public class CustomerController {
         if (result > 0) {
             return new MessageDTO("The fund has been successfully purchased");
         } else if (result == 0){
-            return new MessageDTO("You didn’t provide enough cash to make this purchase");
+            return new MessageDTO("You didn't provide enough cash to make this purchase");
         } else {
-            return new MessageDTO("You don’t have enough cash in your account to make this purchase");
+            return new MessageDTO("You don't have enough cash in your account to make this purchase");
         }
 
     }
@@ -124,7 +124,7 @@ public class CustomerController {
         if (result == true) {
             return new MessageDTO("The shares have been successfully sold");
         } else {
-            return new MessageDTO("You don’t have that many shares in your portfolio");
+            return new MessageDTO("You don't have that many shares in your portfolio");
         }
     }
 
@@ -143,7 +143,7 @@ public class CustomerController {
         if (result == true) {
             return new MessageDTO("The check has been successfully requested");
         } else {
-            return new MessageDTO("You don’t have sufficient funds in your account to cover the requested check");
+            return new MessageDTO("You don't have sufficient funds in your account to cover the requested check");
         }
     }
 }

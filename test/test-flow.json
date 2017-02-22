@@ -429,7 +429,7 @@
           "json": {"symbol":"{{{symbol}}}","cashValue":"0"},
           "match":{
             "json":"$.message",
-            "value":"You didn’t provide enough cash to make this purchase"
+            "value":"You didn't provide enough cash to make this purchase"
           }
          }
        },
@@ -493,7 +493,7 @@
           "json": {"symbol":"{{{symbol}}}","cashValue":"0.05"},
           "match":{
             "json":"$.message",
-            "value":"You didn’t provide enough cash to make this purchase"
+            "value":"You didn't provide enough cash to make this purchase"
           }
          }
        },
@@ -502,7 +502,7 @@
           "json": {"symbol":"{{{symbol}}}","cashValue":"2000"},
           "match":{
             "json":"$.message",
-            "value":"You don’t have enough cash in your account to make this purchase"
+            "value":"You don't have enough cash in your account to make this purchase"
           }
          }
        },
@@ -565,7 +565,7 @@
           "json": {"cashValue":"2000"},
           "match":{
             "json":"$.message",
-            "value":"You don’t have sufficient funds in your account to cover the requested check"
+            "value":"You don't have sufficient funds in your account to cover the requested check"
           }
          }
        },
@@ -619,7 +619,7 @@
           "json": {"symbol":"{{{symbol}}}","numShares":"2"},
           "match":{
             "json":"$.message",
-            "value":"You don’t have that many shares in your portfolio"
+            "value":"You don't have that many shares in your portfolio"
           }
          }
        },
@@ -646,7 +646,7 @@
           "json": {"symbol":"{{{symbol}}}","numShares":"1"},
           "match":{
             "json":"$.message",
-            "value":"You don’t have that many shares in your portfolio"
+            "value":"You don't have that many shares in your portfolio"
           }
          }
        },
@@ -656,7 +656,7 @@
           "match":[
             {
               "json":"$.message",
-              "value":"You don’t have any funds in your Portfolio"
+              "value":"You don't have any funds in your Portfolio"
             }
           ]
          }
